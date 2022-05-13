@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Model\" />
+    <Folder Include="ViewModel\MainPageElenents\MainLayoutElements\ConsoleFiledElelments\" />
     <Folder Include="View\" />
   </ItemGroup>
 </Project>

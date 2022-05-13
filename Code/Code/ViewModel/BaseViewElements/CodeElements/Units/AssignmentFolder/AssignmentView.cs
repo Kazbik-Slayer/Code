@@ -1,10 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Xamarin.Forms;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units
 {
-    internal class AssignmentView
+    public class AssignmentView : DraggableElements
     {
+        private readonly Frame Frame;
+        public AssignmentView()
+        {
+            Frame = (Frame) new SimpleUnitFrame(new StackLayout()
+            {
+                Children =
+                {
+                    new SimpleUnitEntry("Name", new Color(156 / 256.0, 8 / 256.0, 60 / 256.0)).GetView(),
+                    new SimpleUnitEntry("Value", new Color(156 / 256.0, 8 / 256.0, 60 / 256.0)).GetView(),
+                },
+                Orientation = StackOrientation.Horizontal,
+                Margin = 0,
+                Spacing = 3
+            }, new Color(189 / 256.0, 0 / 256.0, 66 / 256.0)).GetView();
+        }
+        public override View GetView()
+        {
+            return Frame;
+        }
     }
 }

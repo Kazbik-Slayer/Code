@@ -15,6 +15,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Padding = 10,
                 Margin = 0,
+                HasShadow = true,
             };
         }
         public override View GetView()
