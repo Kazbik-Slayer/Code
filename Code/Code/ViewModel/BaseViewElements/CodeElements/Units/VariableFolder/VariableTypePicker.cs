@@ -13,8 +13,8 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder
                 BackgroundColor = color,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center,
                 TextColor = Color.Black,
+                Title = "Type",
                 Margin = 0,
             };
             TypePicker.Items.Add("int");

@@ -7,16 +7,13 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionBu
     public class CancelButton : BaseView
     {
         private readonly Button Button;
-        private readonly MainField MainField;
-        public CancelButton(MainField mainField)
+        public CancelButton(MainField MainField)
         {
-            MainField = mainField;
             Button = (Button) new SelectionButton("Cancel", new Color(188 / 255.0, 23 / 255.0, 92 / 255.0)).GetView();
-            Button.Clicked += Cancel;
-        }
-        private void Cancel(object sender, EventArgs e)
-        {
-            MainField.SetCodeFiled();
+            Button.Clicked += (s, e) =>
+            {
+                MainField.SetCodeFiled();
+            };
         }
         public override View GetView()
         {

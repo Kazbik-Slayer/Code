@@ -21,6 +21,11 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
             SelectionField = new SelectionField(this);
             SetCodeFiled();
         }
+        public void SetCustomFiled(View View)
+        {
+            MainFieldView.Children.Clear();
+            MainFieldView.Children.Add(View);
+        }
         public void SetCodeFiled()
         {
             MainFieldView.Children.Clear();

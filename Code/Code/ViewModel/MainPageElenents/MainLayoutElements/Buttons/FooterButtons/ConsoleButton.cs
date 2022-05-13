@@ -6,9 +6,13 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.FooterButto
     public class ConsoleButton : BaseView
     {
         Button Button;
-        public ConsoleButton()
+        public ConsoleButton(MainField mainField)
         {
             Button = (Button)new FooterButton("Console").GetView();
+            Button.Clicked += (s, e) =>
+            {
+                mainField.SetConsoleField();
+            };
         }
         public override View GetView()
         {

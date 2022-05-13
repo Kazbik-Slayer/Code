@@ -11,6 +11,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
         public SelectionField(MainField mainField)
         {
             MainField = mainField;
+
             SelectionLayout = new StackLayout()
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
@@ -23,10 +24,12 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
             {
                 VerticalOptions = LayoutOptions.CenterAndExpand,
             };
+
             stackLayout.Children.Add(new VariableButton(MainField).GetView());
-            stackLayout.Children.Add(new OutputButton(MainField).GetView());
             stackLayout.Children.Add(new AssignmentButton(MainField).GetView());
+            stackLayout.Children.Add(new OutputButton(MainField).GetView());
             stackLayout.Children.Add(new CancelButton(MainField).GetView());
+
             SelectionLayout.Children.Add(stackLayout);
         }
         public override View GetView()

@@ -2,6 +2,7 @@
 using App2.ViewModel.BaseViewElements;
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.FooterButtons;
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Fields;
+using Code.ViewModel.MainPageElenents.MainLayoutElements.Buttons.FooterButtons;
 
 namespace App2.ViewModel.MainPageElenents.MainLayoutElements
 {
@@ -26,7 +27,8 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
         protected override void Compose()
         {
             FooterStackLayout.Children.Add(new LaunchButton().GetView());
-            FooterStackLayout.Children.Add(new ConsoleButton().GetView());
+            FooterStackLayout.Children.Add(new ConsoleButton(MainField).GetView());
+            FooterStackLayout.Children.Add(new CodeButton(MainField).GetView());
             FooterStackLayout.Children.Add(new AdditionButton(MainField).GetView());
         }
         public override View GetView()

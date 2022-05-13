@@ -2,7 +2,6 @@
 using Xamarin.Forms;
 using App2.ViewModel.BaseViewElements;
 using App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder;
-using System.Threading.Tasks;
 
 namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionButtons
 {
