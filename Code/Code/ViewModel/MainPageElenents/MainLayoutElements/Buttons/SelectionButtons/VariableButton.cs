@@ -17,7 +17,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionBu
         }
         private void AddVariable(object sender, EventArgs e)
         {
-            MainField.CodeField.MainBlockView.BlockElementsHolder.Children.Add(new VariableView().GetView());
+            MainField.CodeField.MainBlockView.BlockElementsHolder.Children.Add(new VariableView(MainField).GetView());
             MainField.SetCodeFiled();
         }
         public override View GetView()

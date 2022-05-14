@@ -1,12 +1,14 @@
 ﻿using Xamarin.Forms;
+using App2.ViewModel.MainPageElenents.MainLayoutElements;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder
 {
     public class VariableView : DraggableElements
     {
-        public VariableView()
+        public VariableView(MainField mainField) : base()
         {
-            DragAndDropLayout = new StackLayout();
+            MainField = mainField;
+            //DragAndDropLayout = new StackLayout();
             Compose();
         }
         protected override void Compose()
@@ -23,9 +25,9 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder
             variableLayout.Children.Add(Name.GetView());
             variableLayout.Children.Add(Value.GetView());
 
-            Frame frame = (Frame) new SimpleUnitFrame(variableLayout, new Color(235 / 255.0, 0 / 255.0, 47 / 255.0)).GetView();
+            Frame DragAndDropFrame = (Frame) new SimpleUnitFrame(variableLayout, new Color(235 / 255.0, 0 / 255.0, 47 / 255.0)).GetView();
 
-            DragAndDropLayout.Children.Add(frame);
+            DragAndDropLayout.Children.Add(DragAndDropFrame);
         }
         public override View GetView()
         {
