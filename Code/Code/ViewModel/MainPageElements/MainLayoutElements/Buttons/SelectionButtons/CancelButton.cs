@@ -12,7 +12,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionBu
             Button = (Button) new SelectionButton("Cancel", new Color(188 / 255.0, 23 / 255.0, 92 / 255.0)).GetView();
             Button.Clicked += (s, e) =>
             {
-                MainField.SetCodeFiled();
+                MainField.SetCodeField();
             };
         }
         public override View GetView()

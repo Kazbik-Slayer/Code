@@ -11,6 +11,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
                 Placeholder = placeHoler,
                 BackgroundColor = color,
                 TextColor = Color.Black,

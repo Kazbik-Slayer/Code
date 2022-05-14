@@ -1,64 +1,44 @@
-﻿using System.Collections.Generic;
-using Xamarin.Forms;
-using App2.ViewModel.BaseViewElements.CodeElements.BlcokViews;
-using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
-using App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder;
+﻿using Xamarin.Forms;
 using App2.ViewModel.MainPageElenents.MainLayoutElements;
+using Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicBlockParts;
+using System.Collections.Generic;
+using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units
 {
-    public class LogicBlockView : BaseView
+    public class LogicBlockView : DraggableElements
     {
-        private readonly List<BlockView> ExpBlockList;
-        private readonly List<Entry> ExpressionsList;
-        private readonly StackLayout LogickBlockLayout;
-        private readonly Frame LogicEntryFrame;
-        private readonly MainBlockView MainBlock;
+        public StackLayout LogickBlockLayout;
         private readonly MainField MainField;
-        public LogicBlockView(MainBlockView block, MainField mainField)
+        public bool hasElse;
+        public List<BlockView> BlockViewList;
+        public LogicBlockView(MainField mainField)
         {
-            MainBlock = block;
             MainField = mainField;
-
-            ExpBlockList = new List<BlockView>();
-            ExpressionsList = new List<Entry>();
-
-            LogickBlockLayout = new StackLayout()
+            hasElse = false;
+            LogickBlockLayout = new StackLayout(){ Orientation = StackOrientation.Vertical };
+            BlockViewList = new List<BlockView>();
+            Frame frame = new Frame()
             {
-                Orientation = StackOrientation.Vertical,
+                Content = LogickBlockLayout,
+                Margin = 0,
+                Padding = 1,
+                CornerRadius = 10,
+                BackgroundColor = new Color(38 / 256.0, 1 / 256.0, 117 / 256.0),
+                BorderColor = new Color(19 / 256.0, 232 / 256.0, 143 / 256.0),
             };
+            DragAndDropLayout = new StackLayout() { Children = { frame } };
             Compose();
         }
         protected override void Compose()
         {
-            BlockView blockView = new BlockView();
-            StackLayout stackLayout = (StackLayout)blockView.GetView();
-
-            SimpleUnitLabel SEL = new SimpleUnitLabel("If");
-            SimpleUnitEntry SUE = new SimpleUnitEntry("Expressions", new Color(0 / 256.0, 170 / 256.0, 94 / 256.0));
-            SupplementButton LogicSButtton = new SupplementButton(true, MainField, stackLayout);//TODO: удалить ненужные аргументы из конструктора
-
-            blockView.BlockElementsHolder.Children.Add(new Frame()
-            {
-                Content = new StackLayout()
-                {
-                    Orientation = StackOrientation.Horizontal,
-                    Children =
-                    {
-                        SEL.GetView(),
-                        SUE.GetView(),
-                        LogicSButtton.GetView(),
-                    }
-                },
-            });
-
-            blockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, stackLayout).GetView());
-            //LogickBlockLayout.Children.Add();
-            ExpBlockList.Add(blockView);
+            IF_Block IF = new IF_Block(MainField, this);
+            BlockViewList.Add(IF.BlockView);
+            LogickBlockLayout.Children.Add(IF.GetView());
         }
         public override View GetView()
         {
-            return LogicEntryFrame;
+            return DragAndDropLayout;
         }
     }
 }

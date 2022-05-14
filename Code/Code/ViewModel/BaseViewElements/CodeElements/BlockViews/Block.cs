@@ -2,7 +2,7 @@
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.BlockViews
 {
-    public class Block : BaseView
+    public class Block : DraggableElements
     {
         public StackLayout BlockElementsHolder;
     }
