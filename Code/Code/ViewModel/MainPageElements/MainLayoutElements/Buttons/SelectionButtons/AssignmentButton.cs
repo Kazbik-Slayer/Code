@@ -7,13 +7,15 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionBu
     public class AssignmentButton : BaseView
     {
         private readonly Button Button;
-        public AssignmentButton(MainField mainField)
+        public AssignmentButton(MainField mainField, StackLayout layoutToAddUnit, Button replaceButton = null)
         {
             Button = (Button) new SelectionButton("Assignment", new Color(189 / 256.0, 0 / 256.0, 66 / 256.0)).GetView();
             Button.Clicked += (sender, e) =>
             {
-                mainField.CodeField.MainBlockView.BlockElementsHolder.Children.Add(new AssignmentView().GetView());
-                mainField.SetCodeFiled();
+                if (replaceButton != null) layoutToAddUnit.Children.Remove(replaceButton);
+                layoutToAddUnit.Children.Add(new AssignmentView().GetView());
+                if (replaceButton != null) layoutToAddUnit.Children.Add(replaceButton);
+                mainField.SetCodeField();
             };
         }
         public override View GetView()

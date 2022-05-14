@@ -12,7 +12,10 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
             {
                 Text = text,
                 TextColor = Color.Black,
-                Margin = 5,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                FontSize = 18,
+                Margin = 3,
             };
         }
         public override View GetView()

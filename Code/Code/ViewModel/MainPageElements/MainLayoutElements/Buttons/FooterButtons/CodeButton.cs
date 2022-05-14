@@ -13,7 +13,7 @@ namespace Code.ViewModel.MainPageElenents.MainLayoutElements.Buttons.FooterButto
             Button = (Button) new FooterButton("Code").GetView();
             Button.Clicked += (sender, e) =>
             {
-                mainField.SetCodeFiled();
+                mainField.SetCodeField();
             };
         }
         public override View GetView()

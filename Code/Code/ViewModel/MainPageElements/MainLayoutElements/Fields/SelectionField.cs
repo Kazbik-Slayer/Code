@@ -15,6 +15,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
             SelectionLayout = new StackLayout()
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = new Color(0 / 256.0, 48 / 256.0, 73 / 256.0),
             };
             Compose();
         }
@@ -25,9 +26,10 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
                 VerticalOptions = LayoutOptions.CenterAndExpand,
             };
 
-            stackLayout.Children.Add(new VariableButton(MainField).GetView());
-            stackLayout.Children.Add(new AssignmentButton(MainField).GetView());
-            stackLayout.Children.Add(new OutputButton(MainField).GetView());
+            stackLayout.Children.Add(new LogicButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
+            stackLayout.Children.Add(new VariableButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
+            stackLayout.Children.Add(new AssignmentButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
+            stackLayout.Children.Add(new OutputButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
             stackLayout.Children.Add(new CancelButton(MainField).GetView());
 
             SelectionLayout.Children.Add(stackLayout);

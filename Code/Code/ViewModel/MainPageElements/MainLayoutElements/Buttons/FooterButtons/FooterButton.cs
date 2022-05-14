@@ -12,6 +12,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.FooterButto
             {
                 Text = buttonName,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
+                TextColor = Color.White,
                 BackgroundColor = new Color(188 / 255.0, 23 / 255.0, 92 / 255.0),
                 CornerRadius = 10,
                 Margin = 5,

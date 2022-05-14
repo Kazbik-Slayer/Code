@@ -1,7 +1,6 @@
 ﻿using Xamarin.Forms;
-using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 
-namespace App2.ViewModel.BaseViewElements.CodeElements.BlcokViews
+namespace App2.ViewModel.BaseViewElements.CodeElements.BlockViews
 {
     public class MainBlockView : Block
     {

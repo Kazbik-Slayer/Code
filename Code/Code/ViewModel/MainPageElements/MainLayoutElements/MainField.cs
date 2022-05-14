@@ -19,14 +19,14 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
             CodeField = new CodeField();
             ConsoleField = new ConsoleField();
             SelectionField = new SelectionField(this);
-            SetCodeFiled();
+            SetCodeField();
         }
-        public void SetCustomFiled(View View)
+        public void SetCustomField(View View)
         {
             MainFieldView.Children.Clear();
             MainFieldView.Children.Add(View);
         }
-        public void SetCodeFiled()
+        public void SetCodeField()
         {
             MainFieldView.Children.Clear();
             MainFieldView.Children.Add(CodeField.GetView());
