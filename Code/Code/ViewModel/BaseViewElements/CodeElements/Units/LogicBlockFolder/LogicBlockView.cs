@@ -9,6 +9,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
     public class LogicBlockView : DraggableElements
     {
         public StackLayout LogickBlockLayout;
+        public StackLayout ELSEl;
         public bool hasElse;
         public List<BlockView> BlockViewList;
         public LogicBlockView(MainField mainField) : base()

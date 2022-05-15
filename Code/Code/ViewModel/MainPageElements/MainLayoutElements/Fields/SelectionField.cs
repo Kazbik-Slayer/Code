@@ -27,6 +27,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
             };
 
             stackLayout.Children.Add(new LogicButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
+            stackLayout.Children.Add(new WhileCycleButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
             stackLayout.Children.Add(new VariableButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
             stackLayout.Children.Add(new AssignmentButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
             stackLayout.Children.Add(new OutputButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
