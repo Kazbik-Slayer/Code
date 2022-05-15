@@ -4,15 +4,9 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.BlockViews
 {
     public class MainBlockView : Block
     {
-        public MainBlockView()
+        public MainBlockView() : base()
         {
-            BlockElementsHolder = new StackLayout()
-            {
-                Orientation = StackOrientation.Vertical,
-                Margin = 3,
-                Padding = 0,
-                Spacing = 10,
-            };
+
         }
         public override View GetView()
         {

@@ -5,10 +5,10 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder
 {
     public class VariableView : DraggableElements
     {
-        public VariableView(MainField mainField) : base()
+        public VariableView(MainField mainField, StackLayout stackLayout) : base()
         {
+            DragAndDropParentLayout = stackLayout;
             MainField = mainField;
-            //DragAndDropLayout = new StackLayout();
             Compose();
         }
         protected override void Compose()

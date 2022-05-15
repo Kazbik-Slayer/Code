@@ -5,7 +5,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
     public class AssignmentView : DraggableElements
     {
         private readonly Frame Frame;
-        public AssignmentView()
+        public AssignmentView() : base()
         {
             Frame = (Frame) new SimpleUnitFrame(new StackLayout()
             {
@@ -18,10 +18,11 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
                 Margin = 0,
                 Spacing = 3
             }, new Color(189 / 256.0, 0 / 256.0, 66 / 256.0)).GetView();
+            DragAndDropLayout.Children.Add(Frame);
         }
         public override View GetView()
         {
-            return Frame;
+            return DragAndDropLayout;
         }
     }
 }

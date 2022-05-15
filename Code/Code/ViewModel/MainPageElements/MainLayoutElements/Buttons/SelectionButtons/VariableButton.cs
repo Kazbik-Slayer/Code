@@ -14,7 +14,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionBu
             Button.Clicked += (s, e) =>
             {
                 if (replaceButton != null) layoutToAddUnit.Children.Remove(replaceButton);
-                layoutToAddUnit.Children.Add(new VariableView().GetView());
+                layoutToAddUnit.Children.Add(new VariableView(mainField, layoutToAddUnit).GetView());
                 if (replaceButton != null) layoutToAddUnit.Children.Add(replaceButton);
                 mainField.SetCodeField();
             };

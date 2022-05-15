@@ -28,11 +28,13 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                 StackLayout ButtonsHolder = new StackLayout()
                 {
                     VerticalOptions = LayoutOptions.FillAndExpand,
+                    BackgroundColor = new Color(0 / 256.0, 48 / 256.0, 73 / 256.0),
                 };
 
                 StackLayout Buttons = new StackLayout()
                 {
                     VerticalOptions = LayoutOptions.CenterAndExpand,
+                    BackgroundColor = new Color(0 / 256.0, 48 / 256.0, 73 / 256.0),
                 };
                 if (isLogic)
                 {

@@ -9,10 +9,9 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
     public class LogicBlockView : DraggableElements
     {
         public StackLayout LogickBlockLayout;
-        private readonly MainField MainField;
         public bool hasElse;
         public List<BlockView> BlockViewList;
-        public LogicBlockView(MainField mainField)
+        public LogicBlockView(MainField mainField) : base()
         {
             MainField = mainField;
             hasElse = false;
@@ -27,7 +26,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
                 BackgroundColor = new Color(38 / 256.0, 1 / 256.0, 117 / 256.0),
                 BorderColor = new Color(19 / 256.0, 232 / 256.0, 143 / 256.0),
             };
-            DragAndDropLayout = new StackLayout() { Children = { frame } };
+            DragAndDropLayout.Children.Add(frame);
             Compose();
         }
         protected override void Compose()

@@ -5,6 +5,7 @@ namespace App2.ViewModel.BaseViewElements
 {
     public class DraggableElements : BaseView
     {
+          
         public StackLayout DragAndDropParentLayout;
         public StackLayout DragAndDropLayout;
         public MainField MainField;
@@ -14,7 +15,7 @@ namespace App2.ViewModel.BaseViewElements
         }
         public void AddDraggableElements()
         {
-            DragAndDropLayout = new StackLayout();
+            DragAndDropLayout = new StackLayout() { Padding = 3.25 };
             DragGestureRecognizer dragGestureRecognizer = new DragGestureRecognizer();
             DropGestureRecognizer dropGestureRecognizer = new DropGestureRecognizer();
             dragGestureRecognizer.DragStarting += OnDrag;
@@ -24,13 +25,7 @@ namespace App2.ViewModel.BaseViewElements
         }
         public void OnDrag(object sender, DragStartingEventArgs e)
         {
-            foreach(View CurrentView in DragAndDropParentLayout.Children)
-            {
-                if (DragAndDropLayout == CurrentView)
-                {
-                    DragAndDropParentLayout.Children.Remove(CurrentView);
-                }
-            }
+            
         }
         public void OnDrop(object sender, DropCompletedEventArgs e)
         {
