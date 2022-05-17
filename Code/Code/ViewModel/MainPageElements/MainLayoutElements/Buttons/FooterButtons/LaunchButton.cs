@@ -6,9 +6,13 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.FooterButto
     public class LaunchButton : BaseView
     {        
         Button Button;
-        public LaunchButton()
+        public LaunchButton(MainField mainField)
         {
             Button = (Button)new FooterButton("Launch").GetView();
+            Button.Clicked += (s, e) =>
+            {
+                mainField.LaunchCommands();
+            };
         }
         public override View GetView()
         {

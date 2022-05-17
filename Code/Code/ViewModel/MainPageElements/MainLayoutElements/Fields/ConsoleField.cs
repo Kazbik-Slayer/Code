@@ -5,6 +5,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
 {
     public class ConsoleField : BaseView
     {
+        public Label Console;
         private readonly StackLayout ConsoleLayout;
         public ConsoleField()
         {
@@ -19,7 +20,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
         }
         protected override void Compose()
         {
-            Label Console = new Label()
+            Console = new Label()
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
@@ -27,7 +28,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalTextAlignment = TextAlignment.Start,
                 FontSize = 30,
-                Text = "Console",
+                Text = "Console\n",
                 Margin = new Thickness(10, 10, 10, 10),
             };
             

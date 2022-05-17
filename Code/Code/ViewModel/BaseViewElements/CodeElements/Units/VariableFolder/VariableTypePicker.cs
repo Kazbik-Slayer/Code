@@ -1,11 +1,12 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder
 {
     public class VariableTypePicker : BaseView
     {
-        Picker TypePicker;
-        Frame Frame;
+        public Picker TypePicker;
+        private Frame Frame;
         public VariableTypePicker(Color color)
         {
             TypePicker = new Picker()

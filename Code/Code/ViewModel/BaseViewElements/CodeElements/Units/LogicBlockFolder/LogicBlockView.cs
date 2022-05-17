@@ -3,6 +3,7 @@ using App2.ViewModel.MainPageElenents.MainLayoutElements;
 using Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicBlockParts;
 using System.Collections.Generic;
 using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
+using Codeblock.Model;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units
 {
@@ -11,9 +12,10 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         public StackLayout LogickBlockLayout;
         public bool hasElse;
         public List<BlockView> BlockViewList;
-        public LogicBlockView(MainField mainField) : base()
+        public LogicBlockView(MainField mainField, CodeBlock codeBlock) : base()
         {
             MainField = mainField;
+            CodeBlock = codeBlock;
             hasElse = false;
             LogickBlockLayout = new StackLayout(){ Orientation = StackOrientation.Vertical };
             BlockViewList = new List<BlockView>();
@@ -31,7 +33,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         }
         protected override void Compose()
         {
-            IF_Block IF = new IF_Block(MainField, this);
+            IF_Block IF = new IF_Block(MainField, this, CodeBlock);
             BlockViewList.Add(IF.BlockView);
             LogickBlockLayout.Children.Add(IF.GetView());
         }

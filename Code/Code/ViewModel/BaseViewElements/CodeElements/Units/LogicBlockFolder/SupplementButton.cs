@@ -5,13 +5,14 @@ using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 using App2.ViewModel.MainPageElenents.MainLayoutElements;
 using Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicButtons;
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionButtons;
+using Codeblock.Model;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
 {
     public class SupplementButton : BaseView
     {
         private readonly Button Button;
-        public SupplementButton(bool isLogic, MainField MainField, LogicBlockView logicBlockView, StackLayout stackLayout)
+        public SupplementButton(bool isLogic, MainField MainField, LogicBlockView logicBlockView, StackLayout stackLayout, CodeBlock codeBlock)
         {
             Button = new Button()
             {
@@ -38,19 +39,19 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                 };
                 if (isLogic)
                 {
-                    Buttons.Children.Add(new SupplimELSEIF(MainField, logicBlockView).GetView());
+                    Buttons.Children.Add(new SupplimELSEIF(MainField, logicBlockView, codeBlock).GetView());
                     if (!logicBlockView.hasElse)
                     {
-                        Buttons.Children.Add(new SupplimELSE(MainField, logicBlockView).GetView());
+                        Buttons.Children.Add(new SupplimELSE(MainField, logicBlockView, codeBlock).GetView());
                     }
                     Buttons.Children.Add(new CancelButton(MainField).GetView());
                 }
                 else
                 {
-                    Buttons.Children.Add(new LogicButton(MainField, stackLayout, Button).GetView());
-                    Buttons.Children.Add(new VariableButton(MainField, stackLayout, Button).GetView());
-                    Buttons.Children.Add(new AssignmentButton(MainField, stackLayout, Button).GetView());
-                    Buttons.Children.Add(new OutputButton(MainField, stackLayout, Button).GetView());
+                    Buttons.Children.Add(new LogicButton(MainField, stackLayout, codeBlock, Button).GetView());
+                    Buttons.Children.Add(new VariableButton(MainField, stackLayout, codeBlock, Button).GetView());
+                    Buttons.Children.Add(new AssignmentButton(MainField, stackLayout, codeBlock, Button).GetView());
+                    Buttons.Children.Add(new OutputButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new CancelButton(MainField).GetView());
                 }
                 ButtonsHolder.Children.Add(Buttons);

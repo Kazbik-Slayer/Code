@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using App2.ViewModel.BaseViewElements;
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionButtons;
+using Codeblock.Model;
 
 namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
 {
@@ -8,9 +9,11 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
     {
         private StackLayout SelectionLayout;
         private MainField MainField;
-        public SelectionField(MainField mainField)
+        private ElderCodeBlock ElderCodeBlock;
+        public SelectionField(MainField mainField, ElderCodeBlock elderCodeBlock)
         {
             MainField = mainField;
+            ElderCodeBlock = elderCodeBlock;
 
             SelectionLayout = new StackLayout()
             {
@@ -26,10 +29,10 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
                 VerticalOptions = LayoutOptions.CenterAndExpand,
             };
 
-            stackLayout.Children.Add(new LogicButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
-            stackLayout.Children.Add(new VariableButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
-            stackLayout.Children.Add(new AssignmentButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
-            stackLayout.Children.Add(new OutputButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder).GetView());
+            stackLayout.Children.Add(new LogicButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder, ElderCodeBlock.Main).GetView());
+            stackLayout.Children.Add(new VariableButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder, ElderCodeBlock.Main).GetView());
+            stackLayout.Children.Add(new AssignmentButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder, ElderCodeBlock.Main).GetView());
+            stackLayout.Children.Add(new OutputButton(MainField, MainField.CodeField.MainBlockView.BlockElementsHolder, ElderCodeBlock.Main).GetView());
             stackLayout.Children.Add(new CancelButton(MainField).GetView());
 
             SelectionLayout.Children.Add(stackLayout);

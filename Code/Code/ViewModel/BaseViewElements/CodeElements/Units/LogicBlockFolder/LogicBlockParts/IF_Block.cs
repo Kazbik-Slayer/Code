@@ -3,16 +3,18 @@ using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 using App2.ViewModel.BaseViewElements.CodeElements.Units;
 using App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder;
 using App2.ViewModel.MainPageElenents.MainLayoutElements;
+using Codeblock.Model;
 
 namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicBlockParts
 {
     public class IF_Block : LogicUnit
-    { 
-        public IF_Block(MainField mainField, LogicBlockView logicBlock)
+    {
+        public IF_Block(MainField mainField, LogicBlockView logicBlock, CodeBlock codeBlock)
         {
             BlockView = new BlockView();
             MainField = mainField;
             LogicBlockView = logicBlock;
+            CodeBlock = codeBlock;
             Compose();
         }
         protected override void Compose()
@@ -26,12 +28,12 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
                 {
                     new SimpleUnitLabel("IF").GetView(),
                     new SimpleUnitEntry("Expression", new Color(14 / 256.0, 150 / 256.0, 93 / 256.0)).GetView(),
-                    new SupplementButton(true, MainField, LogicBlockView, BlockView.BlockElementsHolder).GetView(),
+                    new SupplementButton(true, MainField, LogicBlockView, BlockView.BlockElementsHolder, CodeBlock).GetView(),
                 }
             },new Color(19 / 256.0, 232 / 256.0, 143 / 256.0)).GetView();
 
             BlockView.BlockElementsHolder.Children.Add(ExpPart);
-            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder).GetView());
+            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder, CodeBlock).GetView());
 
             AssembleFrame = new Frame()
             {

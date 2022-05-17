@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using App2.ViewModel.BaseViewElements;
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Fields;
+using Codeblock.Model;
 
 namespace App2.ViewModel.MainPageElenents.MainLayoutElements
 {
@@ -10,15 +11,17 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
         public CodeField CodeField;
         public ConsoleField ConsoleField;
         public SelectionField SelectionField;
+        public ElderCodeBlock ElderCodeBlock;
         public MainField()
         {
+            ElderCodeBlock = new ElderCodeBlock();
             MainFieldView = new StackLayout() 
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
             };
             CodeField = new CodeField();
             ConsoleField = new ConsoleField();
-            SelectionField = new SelectionField(this);
+            SelectionField = new SelectionField(this, ElderCodeBlock);
             SetCodeField();
         }
         public void SetCustomField(View View)
@@ -40,6 +43,15 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
         {
             MainFieldView.Children.Clear();
             MainFieldView.Children.Add(SelectionField.GetView());
+        }
+        public void LaunchCommands()
+        {
+            ConsoleField.Console.Text = "Console\n";
+            ElderCodeBlock.StartCompilation();
+        }
+        public void ConsoleWriteLine(string text)
+        {
+            ConsoleField.Console.Text += text + "\n";
         }
         public override View GetView()
         {

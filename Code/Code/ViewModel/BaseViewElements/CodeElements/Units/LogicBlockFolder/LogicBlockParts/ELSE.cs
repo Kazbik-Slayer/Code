@@ -3,16 +3,18 @@ using App2.ViewModel.MainPageElenents.MainLayoutElements;
 using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 using Xamarin.Forms;
 using App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder;
+using Codeblock.Model;
 
 namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicBlockParts
 {
     class ELSE : LogicUnit
-    { 
-        public ELSE(MainField mainFiled, LogicBlockView logicBlockView)
+    {
+        public ELSE(MainField mainFiled, LogicBlockView logicBlockView, CodeBlock codeBlock)
         {
             MainField = mainFiled;
             LogicBlockView = logicBlockView;
             BlockView = new BlockView();
+            CodeBlock = codeBlock;
             Compose();
         }
         protected override void Compose()
@@ -29,7 +31,7 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
             }, new Color(19 / 256.0, 232 / 256.0, 143 / 256.0)).GetView();
 
             BlockView.BlockElementsHolder.Children.Add(ExpPart);
-            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder).GetView());
+            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder, CodeBlock).GetView());
 
             AssembleFrame = new Frame()
             {
