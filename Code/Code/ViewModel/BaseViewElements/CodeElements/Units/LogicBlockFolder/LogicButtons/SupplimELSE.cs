@@ -16,8 +16,10 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
             Button = (Button) new SelectionButton("Else", new Color(7 / 256.0, 186 / 256.0, 107 / 256.0)).GetView();
             Button.Clicked += (s, e) =>
             {
-                logicBlockView.LogickBlockLayout.Children.Add(new ELSE(mainField, logicBlockView, codeBlock).GetView());
+                ELSE eLSE = new ELSE(mainField, logicBlockView, codeBlock);
+                logicBlockView.LogickBlockLayout.Children.Add(eLSE.GetView());
                 logicBlockView.hasElse = true;
+                logicBlockView.ELSEl = (StackLayout)eLSE.GetView();
                 mainField.SetCodeField();
             };
         }

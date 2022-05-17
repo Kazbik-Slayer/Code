@@ -20,15 +20,10 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
                 ELSEIF eLSEIF = new ELSEIF(mainField, logicBlockView, codeBlock);
                 if (logicBlockView.hasElse)
                 {
-                    BlockView BV = logicBlockView.BlockViewList[logicBlockView.BlockViewList.Count - 1];
-                    logicBlockView.LogickBlockLayout.Children.Remove(BV.BlockElementsHolder);
-                    logicBlockView.BlockViewList.Remove(BV);
-
+                    logicBlockView.LogickBlockLayout.Children.Remove(logicBlockView.ELSEl);
                     logicBlockView.LogickBlockLayout.Children.Add(eLSEIF.GetView());
                     logicBlockView.BlockViewList.Add(eLSEIF.BlockView);
-
-                    logicBlockView.LogickBlockLayout.Children.Add(BV.BlockElementsHolder);
-                    logicBlockView.BlockViewList.Add(BV);
+                    logicBlockView.LogickBlockLayout.Children.Add(logicBlockView.ELSEl);
                 }
                 else
                 {

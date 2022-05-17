@@ -19,7 +19,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                 Text = "+",
                 CornerRadius = 10,
                 Padding = 0,
-                Margin = 0,
+                Margin = 3,
                 BackgroundColor = new Color(188 / 255.0, 23 / 255.0, 92 / 255.0),
                 WidthRequest = 50,
                 HorizontalOptions = LayoutOptions.Center,
@@ -49,7 +49,9 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                 else
                 {
                     Buttons.Children.Add(new LogicButton(MainField, stackLayout, codeBlock, Button).GetView());
+                    Buttons.Children.Add(new WhileCycleButton(MainField, stackLayout, Button).GetView());
                     Buttons.Children.Add(new VariableButton(MainField, stackLayout, codeBlock, Button).GetView());
+                    Buttons.Children.Add(new ArrayButton(MainField, stackLayout, Button).GetView());
                     Buttons.Children.Add(new AssignmentButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new OutputButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new CancelButton(MainField).GetView());

@@ -11,7 +11,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionBu
         private readonly Button Button;
         public VariableButton(MainField mainField, StackLayout layoutToAddUnit, CodeBlock codeBlock, Button replaceButton = null)
         {
-            Button = (Button) new SelectionButton("Variable", new Color(171 / 255.0, 0 / 255.0, 34 / 255.0)).GetView();
+            Button = (Button) new SelectionButton("Variable", new Color(235 / 255.0, 0 / 255.0, 47 / 255.0)).GetView();
             Button.Clicked += (s, e) =>
             {
                 if (replaceButton != null) layoutToAddUnit.Children.Remove(replaceButton);
