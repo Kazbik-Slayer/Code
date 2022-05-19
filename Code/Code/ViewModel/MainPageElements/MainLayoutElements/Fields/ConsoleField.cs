@@ -5,7 +5,9 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
 {
     public class ConsoleField : BaseView
     {
+        public Label Console;
         private readonly StackLayout ConsoleLayout;
+        private readonly ScrollView ScrollView;
         public ConsoleField()
         {
             ConsoleLayout = new StackLayout()
@@ -15,20 +17,25 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = new Color(0 / 255.0, 83 / 255.0, 149 / 255.0),
             };
+            ScrollView = new ScrollView()
+            {
+                Content = ConsoleLayout,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+            };
             Compose();
         }
         protected override void Compose()
         {
-            Label Console = new Label()
+            Console = new Label()
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 TextColor = Color.Black,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalTextAlignment = TextAlignment.Start,
-                FontSize = 30,
-                Text = "Console",
-                Margin = new Thickness(10, 10, 10, 10),
+                FontSize = 18,
+                Text = "Console\n",
+                Margin = new Thickness(4.5, 4.5, 4.5, 4.5),
             };
             
             ConsoleLayout.Children.Add(new Frame() 
@@ -41,7 +48,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
         }
         public override View GetView()
         {
-            return ConsoleLayout;
+            return ScrollView;
         }
     }
 }

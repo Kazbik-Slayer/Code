@@ -1,6 +1,7 @@
 ﻿using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 using App2.ViewModel.MainPageElenents.MainLayoutElements;
 using Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicBlockParts;
+using Codeblock.Model;
 using Xamarin.Forms;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units
@@ -9,16 +10,20 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
     {
         public StackLayout WhileBlockLayout;
         public BlockView BlockView;
-        public WhileCycleView(MainField mainField) : base()
+        public WhileBlockModel WhileBlockModel;
+        public WhileCycleView(MainField mainField, CodeBlock codeBlock) : base()
         {
             MainField = mainField;
+            WhileBlockModel = new WhileBlockModel(mainField, codeBlock);
+            CodeBlock = WhileBlockModel.CurrentLogicObject.Commands;
+            codeBlock.AddWhileBlockModel(WhileBlockModel);
             WhileBlockLayout = new StackLayout() { Orientation = StackOrientation.Vertical };
             BlockView = new BlockView();
             Compose();
         }
         protected override void Compose()
         {
-            WhileBlock whileBlock = new WhileBlock(MainField);
+            WhileBlock whileBlock = new WhileBlock(MainField, WhileBlockModel.CurrentLogicObject);
             BlockView = whileBlock.BlockView;
             WhileBlockLayout.Children.Add(BlockView.GetView());
             Frame frame = new Frame()

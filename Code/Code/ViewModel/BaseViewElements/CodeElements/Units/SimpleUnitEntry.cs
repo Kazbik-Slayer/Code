@@ -4,10 +4,11 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
 {
     public class SimpleUnitEntry : BaseView
     {
+        public Entry Entry;
         private readonly Frame Frame;
         public SimpleUnitEntry(string placeHoler, Color color)
         {
-            Entry Entry = new Entry()
+            Entry = new Entry()
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 HorizontalTextAlignment = TextAlignment.Center,

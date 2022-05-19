@@ -10,7 +10,6 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
     {
         public BlockView BlockView;
         protected Frame AssembleFrame;
-        protected MainField MainField;
         protected LogicBlockView LogicBlockView;
     }
 }

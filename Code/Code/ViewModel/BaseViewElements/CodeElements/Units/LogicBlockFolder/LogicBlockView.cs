@@ -3,6 +3,7 @@ using App2.ViewModel.MainPageElenents.MainLayoutElements;
 using Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicBlockParts;
 using System.Collections.Generic;
 using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
+using Codeblock.Model;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units
 {
@@ -12,12 +13,16 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         public StackLayout ELSEl;
         public bool hasElse;
         public List<BlockView> BlockViewList;
-        public LogicBlockView(MainField mainField) : base()
+        public LogicBlock LogicBlock;
+        public LogicBlockView(MainField mainField, CodeBlock codeBlock) : base()
         {
             MainField = mainField;
+            CodeBlock = codeBlock;
             hasElse = false;
             LogickBlockLayout = new StackLayout(){ Orientation = StackOrientation.Vertical };
             BlockViewList = new List<BlockView>();
+            LogicBlock = new LogicBlock(codeBlock);
+            codeBlock.AddLogicBlock(LogicBlock);
             Frame frame = new Frame()
             {
                 Content = LogickBlockLayout,
