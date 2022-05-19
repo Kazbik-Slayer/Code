@@ -33,7 +33,7 @@ namespace Codeblock.Model
 				}
 				else
 				{
-					Console.WriteLine("Exception: " + Value + " index out of range");
+					MainField.ConsoleWriteLine("Exception: " + Value + " index out of range");
 					CurrentCodeBlock.Error();
 					return "None";
 				}
@@ -60,7 +60,7 @@ namespace Codeblock.Model
 					}
 					if (i == 0)
 					{
-						Console.WriteLine("Exception: " + Name + " is not found");
+						MainField.ConsoleWriteLine("Exception: " + Name + " is not found");
 						CurrentCodeBlock.Error();
 					}
 				}

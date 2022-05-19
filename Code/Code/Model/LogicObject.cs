@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.ViewModel.MainPageElenents.MainLayoutElements;
+using System;
 using System.Collections.Generic;
 
 namespace Codeblock.Model
@@ -9,8 +10,9 @@ namespace Codeblock.Model
 
 		public string Input;
 		public string Boolean;
-		public LogicObject(CodeBlock CurrentCodeBlock, string input = "") : base()
+		public LogicObject(MainField mainField, CodeBlock CurrentCodeBlock, string input = "") : base()
 		{
+			MainField = mainField;
 			Input = input;
 			Commands = new CodeBlock(CurrentCodeBlock.AreaVariable, CurrentCodeBlock.AreaFunctions);
 		}

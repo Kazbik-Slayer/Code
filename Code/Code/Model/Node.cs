@@ -13,7 +13,7 @@ namespace Codeblock.Model
 
         #region LEVAN POLKKA
         ////////////////////////////_Levan Polkka_////////////////////////////
-        public static string Calculate(string input, string type, CodeBlock CurrentCodeBlock)
+        public string Calculate(string input, string type, CodeBlock CurrentCodeBlock)
         {
             if (type == "index")
             {
@@ -28,7 +28,7 @@ namespace Codeblock.Model
                 }
                 else
                 {
-                    Console.WriteLine("Exception: " + input + " is not correct Variable");
+                    MainField.ConsoleWriteLine("Exception: " + input + " is not correct Variable");
                     CurrentCodeBlock.Error();
                     return "None";
                 }
@@ -58,13 +58,14 @@ namespace Codeblock.Model
                 DataTable table = new DataTable();
                 table.Columns.Add("", typeof(Boolean));
 
+                MainField.ConsoleWriteLine(PrepareString(input, CurrentCodeBlock));
                 try
                 {
                     table.Columns[0].Expression = PrepareString(input, CurrentCodeBlock);
                 }
                 catch (SyntaxErrorException)
                 {
-                    Console.WriteLine("Exception: incorrect bool expression");
+                    MainField.ConsoleWriteLine("Exception: incorrect bool expression");
                     CurrentCodeBlock.Error();
                     return "None";
                 }
@@ -84,12 +85,12 @@ namespace Codeblock.Model
             }
             else
             {
-                Console.WriteLine("Exception: Type is not correct");
+                MainField.ConsoleWriteLine("Exception: Type is not correct");
                 CurrentCodeBlock.Error();
                 return "None";
             }
         }
-        static string PrepareString(string s, CodeBlock CurrentCodeBlock)
+        string PrepareString(string s, CodeBlock CurrentCodeBlock)
         {
             s = s.Replace("||", "Or");
             s = s.Replace("&&", "And");
@@ -124,9 +125,9 @@ namespace Codeblock.Model
                             }
                             if (j == 0)
                             {
-                                Console.WriteLine("Exception: " + CurrentWord + " is not found");
+                                MainField.ConsoleWriteLine("Exception: " + CurrentWord + " is not found");
                                 CurrentCodeBlock.Error();
-                                return "False";
+                                return "false";
                             }
                         }
                     }
@@ -146,7 +147,7 @@ namespace Codeblock.Model
                 return false;
             }
         }
-        public static string GetExpression(string input, CodeBlock CurrentCodeBlock)
+        public string GetExpression(string input, CodeBlock CurrentCodeBlock)
         {
             string output = string.Empty;
             Stack<char> operStack = new Stack<char>();
@@ -176,7 +177,7 @@ namespace Codeblock.Model
 
                     if (!Regex.IsMatch(Number, RegularPatternNumber))
                     {
-                        Console.WriteLine("Exception: " + Number + " is incorrect expression");
+                        MainField.ConsoleWriteLine("Exception: " + Number + " is incorrect expression");
                         CurrentCodeBlock.Error();
                         return "None";
                     }
@@ -208,7 +209,7 @@ namespace Codeblock.Model
 
                                 if (i == input.Length)
                                 {
-                                    Console.WriteLine("Exception: There isn't ] with [");
+                                    MainField.ConsoleWriteLine("Exception: There isn't ] with [");
                                     CurrentCodeBlock.Error();
                                     return "None";
                                 }
@@ -219,7 +220,7 @@ namespace Codeblock.Model
 
                     if (!Regex.IsMatch(Variable, RegularPatternVariable))
                     {
-                        Console.WriteLine("Exception: " + Variable + " is incorrect expression");
+                        MainField.ConsoleWriteLine("Exception: " + Variable + " is incorrect expression");
                         CurrentCodeBlock.Error();
                         return "None";
                     }
@@ -241,7 +242,7 @@ namespace Codeblock.Model
                     {
                         if (operStack.Count == 0)
                         {
-                            Console.WriteLine("Exception: There isn't ( with )");
+                            MainField.ConsoleWriteLine("Exception: There isn't ( with )");
                             CurrentCodeBlock.Error();
                             return "None";
                         }
@@ -252,7 +253,7 @@ namespace Codeblock.Model
                         {
                             if (operStack.Count == 0)
                             {
-                                Console.WriteLine("Exception: There isn't ( with )");
+                                MainField.ConsoleWriteLine("Exception: There isn't ( with )");
                                 CurrentCodeBlock.Error();
                                 return "None";
                             }
@@ -285,7 +286,7 @@ namespace Codeblock.Model
 
             return output;
         }
-        public static string CountingDouble(string input, CodeBlock CurrentCodeBlock)
+        public string CountingDouble(string input, CodeBlock CurrentCodeBlock)
         {
             double result = 0;
             Stack<double> temp = new Stack<double>();
@@ -347,8 +348,7 @@ namespace Codeblock.Model
                         }
                         if (j == 0)
                         {
-                            Console.WriteLine("Exception: " + a + " is undefined");
-                            Console.WriteLine("It's me");
+                            MainField.ConsoleWriteLine("Exception: " + a + " is undefined");
                             CurrentCodeBlock.Error();
                             return "None";
                         }
@@ -379,14 +379,15 @@ namespace Codeblock.Model
                             case '+': result = b + a; break;
                             case '-': result = b - a; break;
                             case '*': result = b * a; break;
-                            case '/': if (a != 0) { result = b / a; break; } else { Console.WriteLine("Exception: attempted to divide by zero"); CurrentCodeBlock.Error(); } break;
+                            case '%': result = b % a; break;
+                            case '/': if (a != 0) { result = b / a; break; } else { MainField.ConsoleWriteLine("Exception: attempted to divide by zero"); CurrentCodeBlock.Error(); } break;
                             case '^': result = ParseToDouble(Math.Pow(ParseToDouble(b.ToString()), ParseToDouble(a.ToString())).ToString()); break;
                         }
                         temp.Push(result);
                     }
                     else
                     {
-                        Console.WriteLine("Exception: incorrect numeric expression");
+                        MainField.ConsoleWriteLine("Exception: incorrect numeric expression");
                         CurrentCodeBlock.Error();
                         return "None";
                     }
@@ -394,13 +395,13 @@ namespace Codeblock.Model
             }
             if (temp.Count != 1)
             {
-                Console.WriteLine("Exception: incorrect numeric expression");
+                MainField.ConsoleWriteLine("Exception: incorrect numeric expression");
                 CurrentCodeBlock.Error();
                 return "None";
             }
             return temp.Peek().ToString();
         }
-        public static string CountingInt(string input, CodeBlock CurrentCodeBlock)
+        public string CountingInt(string input, CodeBlock CurrentCodeBlock)
         {
             int result = 0;
             Stack<int> temp = new Stack<int>();
@@ -462,8 +463,7 @@ namespace Codeblock.Model
                         }
                         if (j == 0)
                         {
-                            Console.WriteLine("Exception: " + a + " is undefined");
-                            Console.WriteLine("It's me");
+                            MainField.ConsoleWriteLine("Exception: " + a + " is undefined");
                             CurrentCodeBlock.Error();
                             return "None";
                         }
@@ -494,14 +494,15 @@ namespace Codeblock.Model
                             case '+': result = b + a; break;
                             case '-': result = b - a; break;
                             case '*': result = b * a; break;
-                            case '/': if (a != 0) { result = b / a; break; } else { Console.WriteLine("Exception: attempted to divide by zero"); CurrentCodeBlock.Error(); } break;
+                            case '%': result = b % a; break;
+                            case '/': if (a != 0) { result = b / a; break; } else { MainField.ConsoleWriteLine("Exception: attempted to divide by zero"); CurrentCodeBlock.Error(); } break;
                             case '^': result = int.Parse(Math.Pow(ParseToDouble(b.ToString()), ParseToDouble(a.ToString())).ToString()); break;
                         }
                         temp.Push(result);
                     }
                     else
                     {
-                        Console.WriteLine("Exception: incorrect numeric expression");
+                        MainField.ConsoleWriteLine("Exception: incorrect numeric expression");
                         CurrentCodeBlock.Error();
                         return "None";
                     }
@@ -509,13 +510,13 @@ namespace Codeblock.Model
             }
             if (temp.Count != 1)
             {
-                Console.WriteLine("Exception: incorrect numeric expression");
+                MainField.ConsoleWriteLine("Exception: incorrect numeric expression");
                 CurrentCodeBlock.Error();
                 return "None";
             }
             return temp.Peek().ToString();
         }
-        public static double ParseToDouble(string value)
+        public double ParseToDouble(string value)
         {
             double result = Double.NaN;
             value = value.Trim();
@@ -528,19 +529,19 @@ namespace Codeblock.Model
             }
             return result;
         }
-        public static bool IsDelimeter(char c)
+        public bool IsDelimeter(char c)
         {
             if (" =".IndexOf(c) != -1)
                 return true;
             return false;
         }
-        public static bool IsOperator(char с)
+        public bool IsOperator(char с)
         {
-            if ("+-/*^()♣".IndexOf(с) != -1)
+            if ("+-/*^()%♣".IndexOf(с) != -1)
                 return true;
             return false;
         }
-        public static bool IsDigit(char c)
+        public bool IsDigit(char c)
         {
             if ("0123456789.".IndexOf(c) != -1)
                 return true;
@@ -561,13 +562,14 @@ namespace Codeblock.Model
                     case '+': return 2;
                     case '-': return 3;
                     case '*': return 4;
+                    case '%': return 4;
                     case '/': return 4;
                     case '^': return 5;
                     default: return 6;
                 }
             }
         }
-        public static string CalculateString(string input, CodeBlock CurrentCodeBlock)
+        public string CalculateString(string input, CodeBlock CurrentCodeBlock)
         {
             string output = string.Empty;
             bool plus = true;
@@ -583,14 +585,14 @@ namespace Codeblock.Model
                 {
                     if (plus)
                     {
-                        Console.WriteLine("Exception: used + incorrectly");
+                        MainField.ConsoleWriteLine("Exception: used + incorrectly");
                         error = true;
                     }
                     plus = true;
                 }
                 else if (Char.IsDigit(input[i]))
                 {
-                    Console.WriteLine("Exception: String + Number is not correct, use \" \" symbols");
+                    MainField.ConsoleWriteLine("Exception: String + Number is not correct, use \" \" symbols");
                     error = true;
                 }
                 else if ((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z')) //TODO: Variable find
@@ -640,7 +642,7 @@ namespace Codeblock.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Exception: don't used +");
+                                    MainField.ConsoleWriteLine("Exception: don't used +");
                                     error = true;
                                 }
                                 j = -1;
@@ -649,8 +651,7 @@ namespace Codeblock.Model
                         }
                         if (j == 0)
                         {
-                            Console.WriteLine("Exception: " + a + " is undefined");
-                            Console.WriteLine("It's me");
+                            MainField.ConsoleWriteLine("Exception: " + a + " is undefined");
                             error = true;
                         }
                     }
@@ -669,12 +670,12 @@ namespace Codeblock.Model
                     }
                     if (input[i] != '\"')
                     {
-                        Console.WriteLine("Exception: Input has incorrect \" symbol");
+                        MainField.ConsoleWriteLine("Exception: Input has incorrect \" symbol");
                         error = true;
                     }
                     else if (!plus)
                     {
-                        Console.WriteLine("Exception: don't used +");
+                        MainField.ConsoleWriteLine("Exception: don't used +");
                         error = true;
                     }
                     plus = false;
@@ -690,7 +691,7 @@ namespace Codeblock.Model
                 return "None";
             }
         }
-        public static string CalculateChar(string input, CodeBlock CurrentCodeBlock)
+        public string CalculateChar(string input, CodeBlock CurrentCodeBlock)
         {
             if (input.Length == 3 && input[0] == '\'' && input[2] == '\'')
             {
@@ -739,15 +740,14 @@ namespace Codeblock.Model
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Exception: Char " + a + " can't assign string");
+                                    MainField.ConsoleWriteLine("Exception: Char " + a + " can't assign string");
                                     CurrentCodeBlock.Error();
                                     return "None";
                                 }
                             }
                         }
                     }
-                    Console.WriteLine("Exception: " + a + " is undefined");
-                    Console.WriteLine("It's me");
+                    MainField.ConsoleWriteLine("Exception: " + a + " is undefined");
                     CurrentCodeBlock.Error();
                     return "None";
                 }
@@ -757,7 +757,7 @@ namespace Codeblock.Model
                 }
                 else
                 {
-                    Console.WriteLine("Char's Input is not correct");
+                    MainField.ConsoleWriteLine("Char's Input is not correct");
                     CurrentCodeBlock.Error();
                     return "None";
                 }

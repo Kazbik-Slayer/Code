@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.ViewModel.MainPageElenents.MainLayoutElements;
+using System;
 using System.Collections.Generic;
 
 namespace Codeblock.Model
@@ -12,7 +13,7 @@ namespace Codeblock.Model
 		{
 			CurrentVariable = new Variable(MainField);
 			currentCodeBlock.AreaVariable[currentCodeBlock.AreaVariable.Count - 1].Add(CurrentVariable);
-			CurrentLogicObject = new LogicObject(currentCodeBlock);
+			CurrentLogicObject = new LogicObject(MainField, currentCodeBlock);
 			CurrentAssignment = new Variable(MainField);
 			CurrentAssignment.Assignment = true;
 		}

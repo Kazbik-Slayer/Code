@@ -7,6 +7,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
     {
         public Label Console;
         private readonly StackLayout ConsoleLayout;
+        private readonly ScrollView ScrollView;
         public ConsoleField()
         {
             ConsoleLayout = new StackLayout()
@@ -15,6 +16,11 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = new Color(0 / 255.0, 83 / 255.0, 149 / 255.0),
+            };
+            ScrollView = new ScrollView()
+            {
+                Content = ConsoleLayout,
+                VerticalOptions = LayoutOptions.FillAndExpand,
             };
             Compose();
         }
@@ -27,9 +33,9 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
                 TextColor = Color.Black,
                 VerticalTextAlignment = TextAlignment.Start,
                 HorizontalTextAlignment = TextAlignment.Start,
-                FontSize = 30,
+                FontSize = 18,
                 Text = "Console\n",
-                Margin = new Thickness(10, 10, 10, 10),
+                Margin = new Thickness(4.5, 4.5, 4.5, 4.5),
             };
             
             ConsoleLayout.Children.Add(new Frame() 
@@ -42,7 +48,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
         }
         public override View GetView()
         {
-            return ConsoleLayout;
+            return ScrollView;
         }
     }
 }

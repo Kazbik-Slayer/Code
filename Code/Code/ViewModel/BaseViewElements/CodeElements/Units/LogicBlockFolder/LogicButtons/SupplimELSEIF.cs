@@ -12,12 +12,12 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
     class SupplimELSEIF : BaseView
     {
         private readonly Button Button;
-        public SupplimELSEIF(MainField mainField, LogicBlockView logicBlockView, CodeBlock codeBlock)
+        public SupplimELSEIF(MainField mainField, LogicBlockView logicBlockView)
         {
             Button = (Button)new SelectionButton("Else If", new Color(7 / 256.0, 186 / 256.0, 107 / 256.0)).GetView();
             Button.Clicked += (s, e) =>
             {
-                ELSEIF eLSEIF = new ELSEIF(mainField, logicBlockView, codeBlock);
+                ELSEIF eLSEIF = new ELSEIF(mainField, logicBlockView);
                 if (logicBlockView.hasElse)
                 {
                     logicBlockView.LogickBlockLayout.Children.Remove(logicBlockView.ELSEl);

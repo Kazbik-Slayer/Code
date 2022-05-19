@@ -67,7 +67,7 @@ namespace Codeblock.Model
 								}
 								if (l == 0)
                                 {
-									Console.WriteLine("Exception: " + Input + " is undefined");
+									MainField.ConsoleWriteLine("Exception: " + Input + " is undefined");
 									CurrentCodeBlock.Error();
 								}
 							}
@@ -77,7 +77,7 @@ namespace Codeblock.Model
 					}
 					if (i == 0)
 					{
-						Console.WriteLine("Exception: " + Name + " is undefined");
+						MainField.ConsoleWriteLine("Exception: " + Name + " is undefined");
 						CurrentCodeBlock.Error();
 					}
 				}

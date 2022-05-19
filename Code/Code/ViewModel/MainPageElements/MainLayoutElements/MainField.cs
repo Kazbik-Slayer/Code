@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 using App2.ViewModel.BaseViewElements;
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Fields;
 using Codeblock.Model;
@@ -46,7 +47,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
         }
         public void LaunchCommands()
         {
-            ConsoleField.Console.Text = "Console\n";
+            ConsoleField.Console.Text = "";
             ElderCodeBlock.StartCompilation();
         }
         public void ConsoleWriteLine(string text)

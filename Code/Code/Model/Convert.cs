@@ -111,7 +111,7 @@ namespace Codeblock.Model
 
 							if (CurrentCodeBlock.AreaVariable[i][j].Value != "None" && CurrentCodeBlock.AreaVariable[i][j].Value.Length != 1)
                             {
-								Console.WriteLine("Exception: String " + CurrentCodeBlock.AreaVariable[i][j].Value + " to char, because length of String isn't one");
+								MainField.ConsoleWriteLine("Exception: String " + CurrentCodeBlock.AreaVariable[i][j].Value + " to char, because length of String isn't one");
 								CurrentCodeBlock.Error();
                             }
                         }
@@ -143,7 +143,7 @@ namespace Codeblock.Model
 				}
 				if (i == 0)
 				{
-					Console.WriteLine("Exception: " + Name + " is not found");
+					MainField.ConsoleWriteLine("Exception: " + Name + " is not found");
 					CurrentCodeBlock.Error();
 				}
 			}

@@ -13,6 +13,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         public StackLayout ELSEl;
         public bool hasElse;
         public List<BlockView> BlockViewList;
+        public LogicBlock LogicBlock;
         public LogicBlockView(MainField mainField, CodeBlock codeBlock) : base()
         {
             MainField = mainField;
@@ -20,6 +21,8 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
             hasElse = false;
             LogickBlockLayout = new StackLayout(){ Orientation = StackOrientation.Vertical };
             BlockViewList = new List<BlockView>();
+            LogicBlock = new LogicBlock(codeBlock);
+            codeBlock.AddLogicBlock(LogicBlock);
             Frame frame = new Frame()
             {
                 Content = LogickBlockLayout,
@@ -34,7 +37,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         }
         protected override void Compose()
         {
-            IF_Block IF = new IF_Block(MainField, this, CodeBlock);
+            IF_Block IF = new IF_Block(MainField, this);
             BlockViewList.Add(IF.BlockView);
             LogickBlockLayout.Children.Add(IF.GetView());
         }

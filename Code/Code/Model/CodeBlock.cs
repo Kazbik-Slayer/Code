@@ -39,10 +39,9 @@ namespace Codeblock.Model
 		{
 			AreaCommands.Add(logicBlock);
 		}
-		public void AddWhileBlock()
+		public void AddWhileBlockModel(WhileBlockModel whileBlockModel)
 		{
-			WhileBlock CurrentWhileBlock = new WhileBlock(this);
-			AreaCommands.Add(CurrentWhileBlock);
+			AreaCommands.Add(whileBlockModel);
 		}
 		public void AddForBlock()
 		{
@@ -65,7 +64,6 @@ namespace Codeblock.Model
 			AreaVariable.Add(new List<Variable>());
 			for (int i = 0; i < AreaCommands.Count; i++)
 			{
-				Console.WriteLine(AreaCommands[i]);
 				AreaCommands[i].Compilation(this);
 				if (CompilationError) break;
 			}

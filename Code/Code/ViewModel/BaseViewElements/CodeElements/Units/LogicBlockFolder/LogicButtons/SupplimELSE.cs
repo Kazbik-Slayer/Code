@@ -11,12 +11,12 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
     class SupplimELSE : BaseView
     {
         private readonly Button Button;
-        public SupplimELSE(MainField mainField, LogicBlockView logicBlockView, CodeBlock codeBlock)
+        public SupplimELSE(MainField mainField, LogicBlockView logicBlockView)
         {
             Button = (Button) new SelectionButton("Else", new Color(7 / 256.0, 186 / 256.0, 107 / 256.0)).GetView();
             Button.Clicked += (s, e) =>
             {
-                ELSE eLSE = new ELSE(mainField, logicBlockView, codeBlock);
+                ELSE eLSE = new ELSE(mainField, logicBlockView);
                 logicBlockView.LogickBlockLayout.Children.Add(eLSE.GetView());
                 logicBlockView.hasElse = true;
                 logicBlockView.ELSEl = (StackLayout)eLSE.GetView();

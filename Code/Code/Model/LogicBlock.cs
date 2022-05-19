@@ -5,11 +5,11 @@ namespace Codeblock.Model
 {
 	public class LogicBlock : Node
 	{
-		public CodeBlock CurrentCodeBlock;
+		public CodeBlock CodeBlock;
 		public List<LogicObject> AreaLogicObjects;
-		public LogicBlock(CodeBlock currentCodeBlock) : base()
+		public LogicBlock(CodeBlock codeBlock) : base()
 		{
-			CurrentCodeBlock = currentCodeBlock;
+			CodeBlock = codeBlock;
 			AreaLogicObjects = new List<LogicObject>();
 		}
 		public override void Compilation(CodeBlock CurrentCodeBlock)
