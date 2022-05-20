@@ -51,7 +51,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                     Buttons.Children.Add(new LogicButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new WhileCycleButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new VariableButton(MainField, stackLayout, codeBlock, Button).GetView());
-                    Buttons.Children.Add(new ArrayButton(MainField, stackLayout, Button).GetView());
+                    Buttons.Children.Add(new ArrayButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new AssignmentButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new OutputButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new CancelButton(MainField).GetView());
