@@ -30,15 +30,17 @@ namespace App2.ViewModel.BaseViewElements
         } 
         public void OnDrag(object sender, DragStartingEventArgs e)
         {
-            e.Data.Properties.Add("layout", DragAndDropLayout);
+            e.Data.Properties.Add("Layout", DragAndDropLayout);
+            e.Data.Properties.Add("ParentLayout", DragAndDropParentLayout);
         }
         public void OnDrop(object sender, DropEventArgs e)
         {
-            var stackLayout = (StackLayout)e.Data.Properties["layout"]; 
-            new StackLayout().Children.Add(stackLayout);
-            if (stackLayout != DragAndDropLayout)
+            if ((StackLayout)e.Data.Properties["Layout"] == DragAndDropLayout)
             {
-                DragAndDropParentLayout.Children.Remove(stackLayout);
+                var stackLayout = (StackLayout)e.Data.Properties["Layout"];
+                new StackLayout().Children.Add(stackLayout);
+                ((StackLayout)e.Data.Properties["ParentLayout"]).Children.Remove(stackLayout);
+                
                 for (int i = 0; i < DragAndDropParentLayout.Children.Count; i++)
                 {
                     if (DragAndDropParentLayout.Children[i] == DragAndDropLayout)
@@ -48,6 +50,20 @@ namespace App2.ViewModel.BaseViewElements
                     }
                 }
             }
+            /*
+                        if (stackLayout != DragAndDropLayout)
+                        {
+                            DragAndDropParentLayout.Children.Remove(stackLayout);
+                            for (int i = 0; i < DragAndDropParentLayout.Children.Count; i++)
+                            {
+                                if (DragAndDropParentLayout.Children[i] == DragAndDropLayout)
+                                {
+                                    DragAndDropParentLayout.Children.Insert(i, stackLayout);
+                                    break;
+                                }
+                            }
+                        }
+            */
         }
     }
 }
