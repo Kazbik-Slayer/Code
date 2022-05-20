@@ -133,7 +133,7 @@ namespace Codeblock.Model
                     }
                 }
             }
-
+            s = s.Replace(",", ".");
             return s;
         }
         static bool IsServiceVariable(string CurrentWord)
@@ -152,7 +152,7 @@ namespace Codeblock.Model
             string output = string.Empty;
             Stack<char> operStack = new Stack<char>();
 
-            string RegularPatternNumber = @"^[0-9]+$";
+            string RegularPatternNumber = @"^[0-9.]+$";
             string RegularPatternVariable = @"^[A-Za-z_][A-Za-z0-9_\[\]]*$";
 
             bool UnaryFlag = true;
@@ -335,24 +335,10 @@ namespace Codeblock.Model
                         }
                     }
 
-                    for (int j = CurrentCodeBlock.AreaVariable.Count - 1; j >= 0; j--)
-                    {
-                        foreach (Variable CurrentVariable in CurrentCodeBlock.AreaVariable[j])
-                        {
-                            if (CurrentVariable.Name == a)
-                            {
-                                temp.Push(ParseToDouble(CurrentVariable.GetValue(CurrentCodeBlock, b)));
-                                j = -1;
-                                break;
-                            }
-                        }
-                        if (j == 0)
-                        {
-                            MainField.ConsoleWriteLine("Exception: " + a + " is undefined");
-                            CurrentCodeBlock.Error();
-                            return "None";
-                        }
-                    }
+                    if (GetValueFromName(CurrentCodeBlock, a, b) == "None") { return "None"; }
+
+                    temp.Push(ParseToDouble(GetValueFromName(CurrentCodeBlock, a, b)));
+
                     i--;
                 }
                 else if (IsOperator(input[i]) || input[i] == 65491 || input[i] == 65493)
@@ -450,24 +436,10 @@ namespace Codeblock.Model
                         }
                     }
 
-                    for (int j = CurrentCodeBlock.AreaVariable.Count - 1; j >= 0; j--)
-                    {
-                        foreach (Variable CurrentVariable in CurrentCodeBlock.AreaVariable[j])
-                        {
-                            if (CurrentVariable.Name == a)
-                            {
-                                temp.Push(int.Parse(CurrentVariable.GetValue(CurrentCodeBlock, b)));
-                                j = -1;
-                                break;
-                            }
-                        }
-                        if (j == 0)
-                        {
-                            MainField.ConsoleWriteLine("Exception: " + a + " is undefined");
-                            CurrentCodeBlock.Error();
-                            return "None";
-                        }
-                    }
+                    if (GetValueFromName(CurrentCodeBlock, a, b) == "None") { return "None"; }
+
+                    temp.Push(int.Parse(GetValueFromName(CurrentCodeBlock, a, b)));
+
                     i--;
                 }
                 else if (IsOperator(input[i]) || input[i] == 65491 || input[i] == 65493)
@@ -568,6 +540,29 @@ namespace Codeblock.Model
                     default: return 6;
                 }
             }
+        }
+        public string GetValueFromName(CodeBlock CurrentCodeBlock, string name, string index = "")
+        {
+            for (int i = CurrentCodeBlock.AreaVariable.Count - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < CurrentCodeBlock.AreaVariable[i].Count; j++)
+                {
+                    if (CurrentCodeBlock.AreaVariable[i][j].Name == name)
+                    {
+                        return CurrentCodeBlock.AreaVariable[i][j].GetValue(CurrentCodeBlock, index);
+                        j = -1;
+                        break;
+                    }
+                }
+                if (i == 0)
+                {
+                    MainField.ConsoleWriteLine("Exception: " + name + " is undefined");
+                    CurrentCodeBlock.Error();
+                    return "None";
+                }
+            }
+            CurrentCodeBlock.Error();
+            return "None";
         }
         public string CalculateString(string input, CodeBlock CurrentCodeBlock)
         {

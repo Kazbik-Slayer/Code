@@ -11,27 +11,32 @@ namespace Codeblock.Model
 		public string Length;
 		public int CurrentLength;
 		public List<Variable> AreaVariable;
-		public ArrayBlock(MainField mainField, int currentLength = 0) : base(mainField)
+		public ArrayBlock(MainField mainField) : base(mainField)
 		{
-			CurrentLength = currentLength;
+			CurrentLength = 0;
 			Array = true;
 			AreaVariable = new List<Variable>();
 		}
 		public void Initialization()
         {
+			for (int i = 0; i < Input.Length; i++)
+            {
+				string CurrentWord = "";
+
+				while (i < Input.Length)
+                {
+					
+                }
+            }
 			for (int i = CurrentLength; i < int.Parse(Length); i++)
             {
-				AreaVariable.Add(new Variable(MainField));
+				AreaVariable.Add(new Variable(MainField, Name + "[" + i + "]", Type));
             }
         }
 		public void AddVariable()
         {
 			AreaVariable[CurrentLength] = new Variable(MainField, Name + "[" + CurrentLength + "]", Type, "");
 			CurrentLength++;
-			if (CurrentLength.ToString() == Length)
-            {
-				//Remove button
-            }
         }
 		public override void WriteLineVariable()
 		{

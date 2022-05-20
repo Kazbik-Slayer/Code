@@ -48,12 +48,11 @@ namespace Codeblock.Model
 			ForBlock CurrentForBlock = new ForBlock(this);
 			AreaCommands.Add(CurrentForBlock);
 		}
-		public void AddArrayBlock()
+		public void AddArrayBlock(ArrayBlock arrayBlock)
 		{
-			ArrayBlock CurrentArrayBlock = new ArrayBlock(MainField);
-			CurrentArrayBlock.Array = true;
-			AreaVariable[AreaVariable.Count - 1].Add(CurrentArrayBlock);
-			AreaCommands.Add(CurrentArrayBlock);
+			arrayBlock.Array = true;
+			AreaVariable[AreaVariable.Count - 1].Add(arrayBlock);
+			AreaCommands.Add(arrayBlock);
 		}
 		public void AddOutputBlock(OutputBlock outputBlock)
 		{
