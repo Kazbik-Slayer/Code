@@ -32,7 +32,7 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
 
             SimpleUnitLabel label = new SimpleUnitLabel("IF");
             SimpleUnitEntry entry = new SimpleUnitEntry("Expression", new Color(14 / 256.0, 150 / 256.0, 93 / 256.0));
-            SupplementButton button = new SupplementButton(true, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands);
+            SupplementButton button = new SupplementButton(true, false, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands);
 
             entry.Entry.TextChanged += EntryValueChanged;
 
@@ -43,7 +43,7 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
             Frame ExpPart = (Frame)new SimpleUnitFrame(IfLayout, new Color(19 / 256.0, 232 / 256.0, 143 / 256.0)).GetView();
 
             BlockView.BlockElementsHolder.Children.Add(ExpPart);
-            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands).GetView());
+            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, false, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands).GetView());
 
             AssembleFrame = new Frame()
             {

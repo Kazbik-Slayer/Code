@@ -33,6 +33,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
             };
             
             SimpleUnitEntry Values = new SimpleUnitEntry("Enter Array Elements", new Color(194 / 256.0, 0 / 256.0, 62 / 256.0));
+
             View ArrayFrame = new SimpleUnitFrame(
                 new StackLayout()
                 {
@@ -44,6 +45,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
                     }
                 }, new Color(255 / 256.0, 0 / 256.0, 81 / 256.0)
             ).GetView();
+
             DragAndDropLayout.Children.Add(ArrayFrame);
         }
         public override View GetView()

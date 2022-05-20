@@ -8,8 +8,9 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.ConverterFolder
 {
     public class ConverterView : DraggableElements
     {
-        public ConverterView() : base()
+        public ConverterView(MainField mainField) : base()
         {
+            MainField = mainField;
             Compose();
         }
         protected override void Compose()

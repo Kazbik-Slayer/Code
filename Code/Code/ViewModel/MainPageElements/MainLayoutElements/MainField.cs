@@ -18,6 +18,7 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements
             ElderCodeBlock = new ElderCodeBlock();
             MainFieldView = new StackLayout() 
             {
+                BackgroundColor = Color.FromRgb(232, 49, 49),
                 VerticalOptions = LayoutOptions.FillAndExpand,
             };
             CodeField = new CodeField();
