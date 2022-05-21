@@ -7,13 +7,15 @@ using Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.LogicB
 using App2.ViewModel.MainPageElenents.MainLayoutElements.Buttons.SelectionButtons;
 using Codeblock.Model;
 using Code.ViewModel.MainPageElements.MainLayoutElements.Buttons.SelectionButtons;
+using App2.ViewModel.BaseViewElements.CodeElements.Units.WhileLoopFolder;
+using App2.ViewModel.BaseViewElements.CodeElements.Units.WhileLoopFolder.Buttons;
 
 namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
 {
     public class SupplementButton : BaseView
     {
         private readonly Button Button;
-        public SupplementButton(bool isLogic, MainField MainField, LogicBlockView logicBlockView, StackLayout stackLayout, CodeBlock codeBlock)
+        public SupplementButton(bool isLogic, bool isLoop, MainField MainField, LogicBlockView logicBlockView, StackLayout stackLayout, CodeBlock codeBlock)
         {
             Button = new Button()
             {
@@ -38,6 +40,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                     VerticalOptions = LayoutOptions.CenterAndExpand,
                     BackgroundColor = new Color(0 / 256.0, 48 / 256.0, 73 / 256.0),
                 };
+
                 if (isLogic)
                 {
                     Buttons.Children.Add(new SupplimELSEIF(MainField, logicBlockView).GetView());
@@ -57,6 +60,11 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder
                     Buttons.Children.Add(new SwapButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new AssignmentButton(MainField, stackLayout, codeBlock, Button).GetView());
                     Buttons.Children.Add(new OutputButton(MainField, stackLayout, codeBlock, Button).GetView());
+                    if (isLoop)
+                    {
+                        Buttons.Children.Add(new BreakButton(MainField, stackLayout, Button).GetView());
+                        Buttons.Children.Add(new ContinueButton(MainField, stackLayout, Button).GetView());
+                    }
                     Buttons.Children.Add(new CancelButton(MainField).GetView());
                 }
                 ButtonsHolder.Children.Add(Buttons);

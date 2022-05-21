@@ -57,6 +57,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
                     }
                 }, new Color(255 / 256.0, 0 / 256.0, 81 / 256.0)
             ).GetView();
+
             DragAndDropLayout.Children.Add(ArrayFrame);
         }
         private void OnPickerSelectedIndexChanged(object sender, EventArgs e)

@@ -17,6 +17,8 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
                 Orientation = StackOrientation.Horizontal,
             };
 
+            MainField = mainField;
+
             SimpleUnitEntry Name = new SimpleUnitEntry("Name", new Color(156 / 256.0, 8 / 256.0, 60 / 256.0));
             SimpleUnitEntry Value = new SimpleUnitEntry("Value", new Color(156 / 256.0, 8 / 256.0, 60 / 256.0));
 
