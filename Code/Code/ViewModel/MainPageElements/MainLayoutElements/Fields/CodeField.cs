@@ -2,6 +2,7 @@
 using App2.ViewModel.BaseViewElements;
 using App2.ViewModel.BaseViewElements.CodeElements.BlockViews;
 using System;
+using Codeblock.Model;
 
 namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
 {
@@ -63,6 +64,10 @@ namespace App2.ViewModel.MainPageElenents.MainLayoutElements.Fields
             var stackLayout = (StackLayout)e.Data.Properties["Layout"];
             new StackLayout().Children.Add(stackLayout);
             ((StackLayout)e.Data.Properties["ParentLayout"]).Children.Remove(stackLayout);
+
+            var node = (Node)e.Data.Properties["Node"];
+            ((CodeBlock)e.Data.Properties["CodeBlock"]).AreaCommands.Remove(node);
+
             Console.WriteLine(":d");
         }
         protected override void Compose()
