@@ -8,6 +8,10 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
 {
     public class LogicUnit : DraggableElements
     {
+        public LogicUnit() : base()
+        {
+
+        }
         public BlockView BlockView;
         protected Frame AssembleFrame;
         protected LogicBlockView LogicBlockView;

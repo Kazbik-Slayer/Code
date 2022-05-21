@@ -11,7 +11,7 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
     {
         public LogicBlock LogicBlock;
         public LogicObject LogicObject;
-        public ELSE(MainField mainFiled, LogicBlockView logicBlockView)
+        public ELSE(MainField mainFiled, LogicBlockView logicBlockView) : base()
         {
             MainField = mainFiled;
             LogicBlockView = logicBlockView;
@@ -26,6 +26,8 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
             LogicBlock.AreaLogicObjects.Add(LogicObject);
             CodeBlock = LogicObject.Commands;
 
+            Node = LogicObject;
+
             StackLayout IfLayout = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
@@ -38,7 +40,7 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
             Frame ExpPart = (Frame)new SimpleUnitFrame(IfLayout, new Color(19 / 256.0, 232 / 256.0, 143 / 256.0)).GetView();
 
             BlockView.BlockElementsHolder.Children.Add(ExpPart);
-            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, false, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands).GetView());
+            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands).GetView());
 
             AssembleFrame = new Frame()
             {

@@ -21,6 +21,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.ConverterFolder
         {
             ConvertBlock = new ConvertBlock(MainField);
             CodeBlock.AddConvertBlock(ConvertBlock);
+            Node = ConvertBlock;
 
             SimpleUnitEntry name = new SimpleUnitEntry("Name", new Color(179 / 256.0, 0 / 256.0, 101 / 256.0));
             VariableTypePicker newType = new VariableTypePicker(new Color(179 / 256.0, 0 / 256.0, 101 / 256.0));

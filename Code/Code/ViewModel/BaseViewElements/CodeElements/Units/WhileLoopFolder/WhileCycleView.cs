@@ -11,7 +11,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         public StackLayout WhileBlockLayout;
         public BlockView BlockView;
         public WhileBlockModel WhileBlockModel;
-        public WhileCycleView(MainField mainField, CodeBlock codeBlock) : base()
+        public WhileCycleView(MainField mainField, StackLayout stackLayout, CodeBlock codeBlock) : base()
         {
             MainField = mainField;
             WhileBlockModel = new WhileBlockModel(mainField, codeBlock);
@@ -19,6 +19,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
             codeBlock.AddWhileBlockModel(WhileBlockModel);
             WhileBlockLayout = new StackLayout() { Orientation = StackOrientation.Vertical };
             BlockView = new BlockView();
+            DragAndDropParentLayout = stackLayout;
             Compose();
         }
         protected override void Compose()

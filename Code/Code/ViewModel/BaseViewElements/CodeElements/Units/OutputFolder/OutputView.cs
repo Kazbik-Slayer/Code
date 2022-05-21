@@ -12,7 +12,9 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         {
             OutputBlock = new OutputBlock(mainField);
             codeBlock.AddOutputBlock(OutputBlock);
+            Node = OutputBlock;
             MainField = mainField;
+            DragAndDropParentLayout = stackLayout;
             SimpleUnitEntry SUE = new SimpleUnitEntry("Write What You Wanna See", new Color(148 / 256.0, 28 / 256.0, 90 / 256.0));
             SUE.Entry.TextChanged += EntryValueChanged;
             SimpleUnitFrame SUF= new SimpleUnitFrame(SUE.GetView(), new Color(189 / 256.0, 40 / 256.0, 117 / 256.0));

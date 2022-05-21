@@ -22,6 +22,8 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.ConverterFolder
             SwapBlock = new SwapBlock(MainField);
             CodeBlock.AddSwapBlock(SwapBlock);
 
+            Node = SwapBlock;
+
             SimpleUnitEntry nameFirst = new SimpleUnitEntry("Name", new Color(179 / 256.0, 0 / 256.0, 53 / 256.0));
             SimpleUnitEntry nameSecond  = new SimpleUnitEntry("Name", new Color(179 / 256.0, 0 / 256.0, 53 / 256.0));
 

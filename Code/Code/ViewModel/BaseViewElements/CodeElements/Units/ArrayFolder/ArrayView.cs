@@ -22,6 +22,7 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         {
             ArrayBlock = new ArrayBlock(MainField);
             CodeBlock.AddArrayBlock(ArrayBlock);
+            Node = ArrayBlock;
 
             VariableTypePicker VTP = new VariableTypePicker(new Color(194 / 256.0, 0 / 256.0, 62 / 256.0));
             SimpleUnitEntry Name = new SimpleUnitEntry("Name", new Color(194 / 256.0, 0 / 256.0, 62 / 256.0));

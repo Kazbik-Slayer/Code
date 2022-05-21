@@ -28,6 +28,8 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units.VariableFolder
             SimpleUnitEntry Name = new SimpleUnitEntry("Name", new Color(171 / 255.0, 0 / 255.0, 34 / 255.0));
             SimpleUnitEntry Value = new SimpleUnitEntry("Value", new Color(171 / 255.0, 0 / 255.0, 34 / 255.0));
 
+            Node = Variable;
+
             Type.TypePicker.SelectedIndexChanged += OnPickerSelectedIndexChanged;
             Name.Entry.TextChanged += EntryNameChanged;
             Value.Entry.TextChanged += EntryValueChanged;

@@ -14,6 +14,7 @@ namespace App2.ViewModel.BaseViewElements
         public StackLayout DragAndDropLayout;
         public MainField MainField;
         public CodeBlock CodeBlock;
+        public Node Node;
         public DraggableElements()
         {
             AddDraggableElements();
@@ -22,7 +23,7 @@ namespace App2.ViewModel.BaseViewElements
         {
             DragAndDropLayout = new StackLayout() { Padding = 3.25 };
             DragGestureRecognizer dragGestureRecognizer = new DragGestureRecognizer();
-            DropGestureRecognizer dropGestureRecognizer = new DropGestureRecognizer() { AllowDrop = true };
+            DropGestureRecognizer dropGestureRecognizer = new DropGestureRecognizer();
             dragGestureRecognizer.DragStarting += OnDrag;
             dragGestureRecognizer.DropCompleted += DragOver;
             dropGestureRecognizer.Drop += OnDrop;
@@ -33,7 +34,7 @@ namespace App2.ViewModel.BaseViewElements
         {
             e.Data.Properties.Add("Layout", DragAndDropLayout);
             e.Data.Properties.Add("ParentLayout", DragAndDropParentLayout);
-            e.Data.Properties.Add("Node", this);
+            e.Data.Properties.Add("Node", Node);
             e.Data.Properties.Add("CodeBlock", CodeBlock);
 
             MainField.CodeField.Code.TranslateTo(0, 30, 150, Easing.SinOut);

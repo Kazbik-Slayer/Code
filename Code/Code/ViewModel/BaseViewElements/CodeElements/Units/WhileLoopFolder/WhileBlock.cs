@@ -25,6 +25,8 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
                 Orientation = StackOrientation.Horizontal,
             };
 
+            Node = LogicObject;
+
             SimpleUnitEntry entry = new SimpleUnitEntry("Expression", new Color(194 / 256.0, 0 / 256.0, 78 / 256.0));
 
             entry.Entry.TextChanged += EntryValueChanged;
@@ -34,7 +36,7 @@ namespace Code.ViewModel.BaseViewElements.CodeElements.Units.LogicBlockFolder.Lo
             Frame ExpPart = (Frame)new SimpleUnitFrame(WhileLayout, new Color(255 / 256.0, 0 / 256.0, 102 / 256.0)).GetView();
 
             BlockView.BlockElementsHolder.Children.Add(ExpPart);
-            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, true, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands).GetView());
+            BlockView.BlockElementsHolder.Children.Add(new SupplementButton(false, MainField, LogicBlockView, BlockView.BlockElementsHolder, LogicObject.Commands).GetView());
 
             AssembleFrame = new Frame()
             {

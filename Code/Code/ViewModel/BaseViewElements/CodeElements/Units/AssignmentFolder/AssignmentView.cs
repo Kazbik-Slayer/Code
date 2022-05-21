@@ -11,13 +11,15 @@ namespace App2.ViewModel.BaseViewElements.CodeElements.Units
         {
             Variable = new Variable(mainField);
             codeBlock.AddAssignment(Variable);
-
+            DragAndDropParentLayout = stackLayout;
             StackLayout assignmentLayout = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
             };
 
             MainField = mainField;
+
+            Node = Variable;
 
             SimpleUnitEntry Name = new SimpleUnitEntry("Name", new Color(156 / 256.0, 8 / 256.0, 60 / 256.0));
             SimpleUnitEntry Value = new SimpleUnitEntry("Value", new Color(156 / 256.0, 8 / 256.0, 60 / 256.0));
