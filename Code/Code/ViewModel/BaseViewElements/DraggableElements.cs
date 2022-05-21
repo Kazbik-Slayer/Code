@@ -60,7 +60,8 @@ namespace App2.ViewModel.BaseViewElements
             MainField.CodeField.RemovePlace.HeightRequest = 0;
             MainField.CodeField.Code.TranslateTo(0, 0, 150, Easing.SinOut);
             MainField.CodeField.RemovePlace.Children.Clear();
-            if ((StackLayout)e.Data.Properties["Layout"] == DragAndDropLayout)
+
+            if ((StackLayout)e.Data.Properties["Layout"] != DragAndDropLayout)
             {
                 var stackLayout = (StackLayout)e.Data.Properties["Layout"];
                 new StackLayout().Children.Add(stackLayout);
