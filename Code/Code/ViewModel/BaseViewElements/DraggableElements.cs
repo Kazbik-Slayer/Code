@@ -22,7 +22,7 @@ namespace App2.ViewModel.BaseViewElements
         {
             DragAndDropLayout = new StackLayout() { Padding = 3.25 };
             DragGestureRecognizer dragGestureRecognizer = new DragGestureRecognizer();
-            DropGestureRecognizer dropGestureRecognizer = new DropGestureRecognizer();
+            DropGestureRecognizer dropGestureRecognizer = new DropGestureRecognizer() { AllowDrop = true };
             dragGestureRecognizer.DragStarting += OnDrag;
             dragGestureRecognizer.DropCompleted += DragOver;
             dropGestureRecognizer.Drop += OnDrop;
@@ -33,6 +33,8 @@ namespace App2.ViewModel.BaseViewElements
         {
             e.Data.Properties.Add("Layout", DragAndDropLayout);
             e.Data.Properties.Add("ParentLayout", DragAndDropParentLayout);
+            e.Data.Properties.Add("Node", this);
+            e.Data.Properties.Add("CodeBlock", CodeBlock);
 
             MainField.CodeField.Code.TranslateTo(0, 30, 150, Easing.SinOut);
             MainField.CodeField.RemovePlace.HeightRequest = 30;
@@ -63,19 +65,24 @@ namespace App2.ViewModel.BaseViewElements
 
             if ((StackLayout)e.Data.Properties["Layout"] != DragAndDropLayout)
             {
+                var node = (Node)e.Data.Properties["Node"];
+                ((CodeBlock)e.Data.Properties["CodeBlock"]).AreaCommands.Remove(node);
+
                 var stackLayout = (StackLayout)e.Data.Properties["Layout"];
                 new StackLayout().Children.Add(stackLayout);
                 ((StackLayout)e.Data.Properties["ParentLayout"]).Children.Remove(stackLayout);
-                
+
                 for (int i = 0; i < DragAndDropParentLayout.Children.Count; i++)
                 {
                     if (DragAndDropParentLayout.Children[i] == DragAndDropLayout)
                     {
+                        CodeBlock.AreaCommands.Insert(i, node);
                         DragAndDropParentLayout.Children.Insert(i, stackLayout);
                         break;
                     }
                 }
             }
+
         }
     }
 }
