@@ -54,6 +54,14 @@ namespace Codeblock.Model
 			AreaVariable[AreaVariable.Count - 1].Add(arrayBlock);
 			AreaCommands.Add(arrayBlock);
 		}
+		public void AddConvertBlock(ConvertBlock convertBlock)
+        {
+			AreaCommands.Add(convertBlock);
+        }
+		public void AddSwapBlock(SwapBlock swapBlock)
+		{
+			AreaCommands.Add(swapBlock);
+		}
 		public void AddOutputBlock(OutputBlock outputBlock)
 		{
 			AreaCommands.Add(outputBlock);
@@ -63,6 +71,7 @@ namespace Codeblock.Model
 			AreaVariable.Add(new List<Variable>());
 			for (int i = 0; i < AreaCommands.Count; i++)
 			{
+				Console.WriteLine(AreaCommands[i]);
 				AreaCommands[i].Compilation(this);
 				if (CompilationError) break;
 			}

@@ -17,32 +17,66 @@ namespace Codeblock.Model
 			Array = true;
 			AreaVariable = new List<Variable>();
 		}
-		public void Initialization()
-        {
+		public void Initialization(CodeBlock CurrentCodeBlock)
+		{
+			CurrentLength = 0;
 			for (int i = 0; i < Input.Length; i++)
             {
 				string CurrentWord = "";
 
-				while (i < Input.Length)
+				while (i < Input.Length && Input[i] != ',')
                 {
-					
+					CurrentWord += Input[i++];
                 }
-            }
+
+				AreaVariable.Add(new Variable(MainField, Name + "[" + CurrentLength + "]", Type, "", Calculate(CurrentWord, Type, CurrentCodeBlock)));
+				CurrentLength++;
+
+				if (CurrentLength > int.Parse(Length))
+                {
+					MainField.ConsoleWriteLine("Notice: So many Input Arguments to Array");
+					break;
+                }
+			}
 			for (int i = CurrentLength; i < int.Parse(Length); i++)
             {
-				AreaVariable.Add(new Variable(MainField, Name + "[" + i + "]", Type));
-            }
-        }
-		public void AddVariable()
-        {
-			AreaVariable[CurrentLength] = new Variable(MainField, Name + "[" + CurrentLength + "]", Type, "");
-			CurrentLength++;
-        }
-		public override void WriteLineVariable()
+				AreaVariable.Add(new Variable(MainField, Name + "[" + CurrentLength + "]", Type));
+				CurrentLength++;
+			}
+		}
+		public override Variable GetVariable(CodeBlock CurrentCodeBlock, string Index = "") 
 		{
-			for (int i = 0; i < int.Parse(Length); i++)
+			if (int.Parse(Calculate(Index, "index", CurrentCodeBlock)) < int.Parse(Length) && int.Parse(Calculate(Index, "index", CurrentCodeBlock)) >= 0)
+			{
+				return AreaVariable[int.Parse(Calculate(Index, "index", CurrentCodeBlock))];
+			}
+            else
             {
-				AreaVariable[i].WriteLineVariable();
+				MainField.ConsoleWriteLine("Exception: index out of range array");
+				CurrentCodeBlock.Error();
+				return null;
+            }
+		}
+		public override void WriteLineVariable(CodeBlock CurrentCodeBlock = null, string Index = "")
+		{
+			if (Index == "")
+			{
+				for (int i = 0; i < int.Parse(Length); i++)
+				{
+					AreaVariable[i].WriteLineVariable();
+				}
+			}
+            else
+            {
+				if (int.Parse(Calculate(Index, "index", CurrentCodeBlock)) < int.Parse(Length) && int.Parse(Calculate(Index, "index", CurrentCodeBlock)) >= 0)
+				{
+					AreaVariable[int.Parse(Calculate(Index, "index", CurrentCodeBlock))].WriteLineVariable();
+				}
+				else
+                {
+					MainField.ConsoleWriteLine("Exception: index out of range array");
+					CurrentCodeBlock.Error();
+                }
             }
 		}
 		public override string GetValue(CodeBlock currentCodeBlock, string input = "")
@@ -89,7 +123,7 @@ namespace Codeblock.Model
 			}
 			else
 			{
-				Initialization();
+				Initialization(CurrentCodeBlock);
 			}
 		}
 	}

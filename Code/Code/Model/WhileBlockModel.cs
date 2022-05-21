@@ -30,6 +30,10 @@ namespace Codeblock.Model
 					CurrentCodeBlock.Error();
 					break;
 				}
+				if (Calculate(CurrentLogicObject.Input, "bool", CurrentCodeBlock) == "false")
+                {
+					break;
+                }
             }
 		}
 	}

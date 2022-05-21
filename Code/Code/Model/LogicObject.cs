@@ -18,6 +18,9 @@ namespace Codeblock.Model
 		}
 		public override void Compilation(CodeBlock CurrentCodeBlock)
 		{
+			Console.WriteLine(Input);
+			Console.WriteLine(Calculate(Input, "bool", CurrentCodeBlock));
+			Console.WriteLine();
 			Boolean = Calculate(Input, "bool", CurrentCodeBlock);
             if (Boolean == "true" && !CurrentCodeBlock.CompilationError)
             {

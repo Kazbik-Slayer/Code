@@ -7,16 +7,16 @@ using Xamarin.Forms;
 
 namespace Code.ViewModel.MainPageElements.MainLayoutElements.Buttons.SelectionButtons
 {
-    public class ConverterButton : BaseView
+    public class SwapButton : BaseView
     {
         private Button Button;
-        public ConverterButton(MainField mainField, StackLayout layoutToAddUnit, CodeBlock codeBlock, Button replaceButton = null)
+        public SwapButton(MainField mainField, StackLayout layoutToAddUnit, CodeBlock codeBlock, Button replaceButton = null)
         {
-            Button = (Button)new SelectionButton("Convert", new Color(224 / 256.0, 0 / 256.0, 127 / 256.0)).GetView();
+            Button = (Button)new SelectionButton("Swap", new Color(255 / 256.0, 0 / 256.0, 76 / 256.0)).GetView();
             Button.Clicked += (sender, e) =>
             {
                 if (replaceButton != null) layoutToAddUnit.Children.Remove(replaceButton);
-                layoutToAddUnit.Children.Add(new ConverterView(mainField, layoutToAddUnit, codeBlock).GetView());
+                layoutToAddUnit.Children.Add(new SwapView(mainField, layoutToAddUnit, codeBlock).GetView());
                 if (replaceButton != null) layoutToAddUnit.Children.Add(replaceButton);
                 mainField.SetCodeField();
             };

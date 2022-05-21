@@ -16,7 +16,6 @@ namespace Codeblock.Model
 		{
 			foreach(LogicObject CurrentLogicObject in AreaLogicObjects)
             {
-				Console.WriteLine(CurrentLogicObject.Input);
 				CurrentLogicObject.Compilation(CurrentCodeBlock);
 
 				if (CurrentLogicObject.Boolean == "true") break;

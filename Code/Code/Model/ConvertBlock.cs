@@ -1,14 +1,16 @@
-﻿using System;
+﻿using App2.ViewModel.MainPageElenents.MainLayoutElements;
+using System;
 using System.Collections.Generic;
 
 namespace Codeblock.Model
 {
-	public class Convert : Node
+	public class ConvertBlock : Node
 	{
 		public string Name;
-		public string InputType; //Scroll with element: int, double, string 
-		public Convert(string name = "", string inputType = "int") : base()
+		public string InputType;
+		public ConvertBlock(MainField mainField, string name = "", string inputType = "int") : base()
 		{
+			MainField = mainField;
 			Name = name;
 			InputType = inputType;
 		}
@@ -56,7 +58,7 @@ namespace Codeblock.Model
 
 							if (CurrentCodeBlock.AreaVariable[i][j].Value != "None")
 							{
-								CurrentCodeBlock.AreaVariable[i][j].Value = (int.Parse(CurrentCodeBlock.AreaVariable[i][j].Value)).ToString();
+								CurrentCodeBlock.AreaVariable[i][j].Value = (Convert.ToInt32(Math.Floor(ParseToDouble(CurrentCodeBlock.AreaVariable[i][j].Value)))).ToString();
 							}
 						}
 						else if (CurrentCodeBlock.AreaVariable[i][j].Type == "double" && InputType == "bool")

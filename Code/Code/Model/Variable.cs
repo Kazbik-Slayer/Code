@@ -19,7 +19,8 @@ namespace Codeblock.Model
 			Value = value;
 			MainField = mainField;
 		}
-		public virtual void WriteLineVariable()
+		public virtual Variable GetVariable(CodeBlock CurrentCodeBlock, string Index = "") { return this; }
+		public virtual void WriteLineVariable(CodeBlock CurrentCodeBlock = null, string Index = "")
 		{
 			MainField.ConsoleWriteLine(Name + " = " + Value);
 		}
@@ -47,20 +48,60 @@ namespace Codeblock.Model
 		{
 			if (Assignment)
 			{
+				string CurrentName = "";
+				string CurrentIndex = "";
+
+				int l = 0;
+				while (l < Name.Length && Name[l] != ' ' && Name[l] != ',')
+				{
+					if (l < Name.Length && Name[l] == '[')
+					{
+						int count = -1;
+						while (l < Name.Length && (Name[l] != ']' || count > 0))
+						{
+							if (Name[l] == '[')
+							{
+								count++;
+							}
+							if (Name[l] == ']')
+							{
+								count--;
+							}
+							CurrentIndex += Name[l++];
+						}
+						if (l == Name.Length) break;
+						CurrentIndex += Name[l++];
+						break;
+					}
+					else
+					{
+						CurrentName += Name[l++];
+					}
+				}
+
 				for (int i = CurrentCodeBlock.AreaVariable.Count - 1; i >= 0; i--)
 				{
 					for (int j = 0; j < CurrentCodeBlock.AreaVariable[i].Count; j++)
 					{
-						if (CurrentCodeBlock.AreaVariable[i][j].Name == Name)
+						if (CurrentCodeBlock.AreaVariable[i][j].Name == CurrentName)
 						{
-							CurrentCodeBlock.AreaVariable[i][j].Value = Calculate(Input, Type, CurrentCodeBlock);
-							i = -1;
-							break;
+							if (CurrentIndex == "")
+							{
+								CurrentCodeBlock.AreaVariable[i][j].Value = Calculate(Input, Type, CurrentCodeBlock);
+								i = -1;
+								break;
+							}
+                            else
+                            {
+								CurrentCodeBlock.AreaVariable[i][j].GetVariable(CurrentCodeBlock, CurrentIndex).Value = Calculate(Input, Type, CurrentCodeBlock);
+								i = -1;
+								break;
+							}
 						}
 					}
 					if (i == 0)
 					{
-						MainField.ConsoleWriteLine("Exception: " + Name + " is not found");
+						MainField.ConsoleWriteLine("Exception: " + CurrentName + " is not found");
 						CurrentCodeBlock.Error();
 					}
 				}

@@ -30,7 +30,7 @@ namespace Codeblock.Model
                 {
                     MainField.ConsoleWriteLine("Exception: " + input + " is not correct Variable");
                     CurrentCodeBlock.Error();
-                    return "None";
+                    return "0";
                 }
             }
             else if (type == "double")
@@ -58,7 +58,6 @@ namespace Codeblock.Model
                 DataTable table = new DataTable();
                 table.Columns.Add("", typeof(Boolean));
 
-                MainField.ConsoleWriteLine(PrepareString(input, CurrentCodeBlock));
                 try
                 {
                     table.Columns[0].Expression = PrepareString(input, CurrentCodeBlock);
@@ -69,6 +68,8 @@ namespace Codeblock.Model
                     CurrentCodeBlock.Error();
                     return "None";
                 }
+
+                Console.WriteLine(PrepareString(input, CurrentCodeBlock));
 
                 DataRow r = table.NewRow();
                 table.Rows.Add(r);
@@ -92,6 +93,11 @@ namespace Codeblock.Model
         }
         string PrepareString(string s, CodeBlock CurrentCodeBlock)
         {
+            string RegularPatternNumber = @"^[0-9.]+$";
+            string RegularPatternVariable = @"^[A-Za-z_][A-Za-z0-9_\[\]]*$";
+
+            string S = "";
+
             s = s.Replace("||", "Or");
             s = s.Replace("&&", "And");
             s = s.Replace("!", "Not");
@@ -101,44 +107,97 @@ namespace Codeblock.Model
             {
                 if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
                 {
-                    string CurrentWord = "";
-                    while ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || s[i] == '[' || s[i] == ']' || s[i] == '.')
-                    {
-                        CurrentWord += s[i];
-                        i++;
+                    string a = string.Empty;
+                    string b = string.Empty;
 
-                        if (i == s.Length) break;
-                    }
-                    if (!IsServiceVariable(CurrentWord))
+                    while (!IsDelimeter(s[i]) && !IsOperator(s[i]))
                     {
+                        if (s[i] == '[')
+                        {
+                            int count = -1;
+                            while (i < s.Length && (s[i] != ']' || count > 0))
+                            {
+                                if (s[i] == '[')
+                                {
+                                    count++;
+                                }
+                                if (s[i] == ']')
+                                {
+                                    count--;
+                                }
+                                b += s[i++];
+                            }
+                            if (i == s.Length) break;
+                            b += s[i++];
+                            break;
+                        }
+                        else
+                        {
+                            a += s[i];
+                            i++;
+                            if (i == s.Length) break;
+                        }
+                    }
+
+                    if (!IsServiceVariable(a))
+                    { 
                         for (int j = CurrentCodeBlock.AreaVariable.Count - 1; j >= 0; j--)
                         {
                             foreach (Variable CurrentVariable in CurrentCodeBlock.AreaVariable[j])
                             {
-                                if (CurrentVariable.Name == CurrentWord && (CurrentVariable.Type == "bool" || CurrentVariable.Type == "int" || CurrentVariable.Type == "double")) //TODO:
+                                if (CurrentVariable.Name == a && (CurrentVariable.Type == "bool" || CurrentVariable.Type == "int" || CurrentVariable.Type == "double")) //TODO:
                                 {
-                                    i += s.Replace(CurrentVariable.Name, CurrentVariable.Value).Length - s.Length;
-                                    s = s.Replace(CurrentVariable.Name, CurrentVariable.Value);
+                                    S += CurrentVariable.GetValueFromName(CurrentCodeBlock, a, b);
                                     j = -1;
                                     break;
                                 }
                             }
                             if (j == 0)
                             {
-                                MainField.ConsoleWriteLine("Exception: " + CurrentWord + " is not found");
+                                MainField.ConsoleWriteLine("Exception: " + a + " is not found");
                                 CurrentCodeBlock.Error();
                                 return "false";
                             }
                         }
+                        S += " ";
                     }
                 }
+                else if (IsDigit(s[i]))
+                {
+                    string Number = string.Empty;
+
+                    while (!IsDelimeter(s[i]) && !IsOperator(s[i]))
+                    {
+                        S += s[i];
+                        Number += s[i];
+                        i++;
+
+                        if (i == s.Length) break;
+                    }
+
+                    if (!Regex.IsMatch(Number, RegularPatternNumber))
+                    {
+                        MainField.ConsoleWriteLine("Exception: " + Number + " is incorrect expression");
+                        CurrentCodeBlock.Error();
+                        return "None";
+                    }
+
+                    S += " ";
+                    i--;
+                }
+                else
+                {
+                    S += s[i];
+                    S += " ";
+                }
             }
-            s = s.Replace(",", ".");
-            return s;
+            Console.WriteLine(S);
+            S = S.Replace(",", ".");
+            return S;
         }
         static bool IsServiceVariable(string CurrentWord)
         {
-            if (CurrentWord == "Or" || CurrentWord == "And" || CurrentWord == "Not" || CurrentWord == "true" || CurrentWord == "false")
+            if (CurrentWord == "Or" || CurrentWord == "And" || CurrentWord == "Not" || CurrentWord.ToLower() == "true" || CurrentWord.ToLower() == "false")
             {
                 return true;
             }
@@ -192,12 +251,12 @@ namespace Codeblock.Model
                 {
                     string Variable = string.Empty;
 
-                    while (!IsDelimeter(input[i]) && !IsOperator(input[i]))
+                    while (i < input.Length && !IsDelimeter(input[i]) && !IsOperator(input[i]))
                     {
                         output += input[i];
                         Variable += input[i];
                         i++;
-
+/*
                         if (i == input.Length) break;
 
                         if (input[i] == '[')
@@ -216,6 +275,7 @@ namespace Codeblock.Model
                             }
                             break;
                         }
+*/
                     }
 
                     if (!Regex.IsMatch(Variable, RegularPatternVariable))
@@ -314,18 +374,24 @@ namespace Codeblock.Model
 
                     while (!IsDelimeter(input[i]) && !IsOperator(input[i]))
                     {
-                        if ("[".IndexOf(input[i]) != -1)
+                        if (input[i] == '[')
                         {
-                            while ("]".IndexOf(input[i]) == -1)
+                            int count = -1;
+                            while (i < input.Length && (input[i] != ']' || count > 0))
                             {
-                                b += input[i];
-                                i++;
-                                if (i == input.Length) break;
+                                if (input[i] == '[')
+                                {
+                                    count++;
+                                }
+                                if (input[i] == ']')
+                                {
+                                    count--;
+                                }
+                                b += input[i++];
                             }
-
                             if (i == input.Length) break;
-                            b += input[i];
-                            i++;
+                            b += input[i++];
+                            break;
                         }
                         else
                         {
@@ -405,7 +471,7 @@ namespace Codeblock.Model
                         i++;
                         if (i == input.Length) break;
                     }
-                    temp.Push(int.Parse(a));
+                    temp.Push(int.Parse(Math.Floor(ParseToDouble(a)).ToString()));
                     i--;
                 }
                 else if ((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z'))
@@ -415,18 +481,24 @@ namespace Codeblock.Model
 
                     while (!IsDelimeter(input[i]) && !IsOperator(input[i]))
                     {
-                        if ("[".IndexOf(input[i]) != -1)
+                        if (input[i] == '[')
                         {
-                            while ("]".IndexOf(input[i]) == -1)
+                            int count = -1;
+                            while (i < input.Length && (input[i] != ']' || count > 0))
                             {
-                                b += input[i];
-                                i++;
-                                if (i == input.Length) break;
+                                if (input[i] == '[')
+                                {
+                                    count++;
+                                }
+                                if (input[i] == ']')
+                                {
+                                    count--;
+                                }
+                                b += input[i++];
                             }
-
                             if (i == input.Length) break;
-                            b += input[i];
-                            i++;
+                            b += input[i++];
+                            break;
                         }
                         else
                         {
@@ -438,7 +510,7 @@ namespace Codeblock.Model
 
                     if (GetValueFromName(CurrentCodeBlock, a, b) == "None") { return "None"; }
 
-                    temp.Push(int.Parse(GetValueFromName(CurrentCodeBlock, a, b)));
+                    temp.Push(int.Parse(Math.Floor(ParseToDouble(GetValueFromName(CurrentCodeBlock, a, b))).ToString()));
 
                     i--;
                 }
@@ -550,8 +622,6 @@ namespace Codeblock.Model
                     if (CurrentCodeBlock.AreaVariable[i][j].Name == name)
                     {
                         return CurrentCodeBlock.AreaVariable[i][j].GetValue(CurrentCodeBlock, index);
-                        j = -1;
-                        break;
                     }
                 }
                 if (i == 0)
@@ -597,18 +667,24 @@ namespace Codeblock.Model
 
                     while (!IsDelimeter(input[i]) && !IsOperator(input[i]))
                     {
-                        if ("[".IndexOf(input[i]) != -1)
+                        if (input[i] == '[')
                         {
-                            while ("]".IndexOf(input[i]) == -1)
+                            int count = -1;
+                            while (i < input.Length && (input[i] != ']' || count > 0))
                             {
-                                b += input[i];
-                                i++;
-                                if (i == input.Length) break;
+                                if (input[i] == '[')
+                                {
+                                    count++;
+                                }
+                                if (input[i] == ']')
+                                {
+                                    count--;
+                                }
+                                b += input[i++];
                             }
-
-                            b += input[i];
-                            i++;
                             if (i == input.Length) break;
+                            b += input[i++];
+                            break;
                         }
                         else
                         {

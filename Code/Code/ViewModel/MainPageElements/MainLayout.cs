@@ -29,6 +29,7 @@ namespace App2.ViewModel.MainPageElenents
             MainStackLayout.Children.Add(mainField.GetView());
             MainStackLayout.Children.Add(footer.GetView());
         }
+
         public override View GetView()
         {
             return MainStackLayout;

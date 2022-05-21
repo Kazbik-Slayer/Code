@@ -17,10 +17,32 @@ namespace Codeblock.Model
 			while (l < Input.Length)
 			{
                 string CurrentName = "";
+                string CurrentIndex = "";
 
                 while (l < Input.Length && Input[l] != ' ' && Input[l] != ',')
                 {
-                    CurrentName += Input[l++];
+                    if (Input[l] == '[')
+                    {
+                        int count = -1;
+                        while (Input[l] != ']' || count > 0)
+                        {
+                            if (Input[l] == '[')
+                            {
+                                count++;
+                            }
+                            if (Input[l] == ']')
+                            {
+                                count--;
+                            }
+                            CurrentIndex += Input[l++];
+                        }
+                        CurrentIndex += Input[l++];
+                        break;
+                    }
+                    else
+                    {
+                        CurrentName += Input[l++];
+                    }
                 }
 
                 if (CurrentName == "")
@@ -35,7 +57,7 @@ namespace Codeblock.Model
                     {
                         if (CurrentCodeBlock.AreaVariable[i][j].Name == CurrentName)
                         {
-                            CurrentCodeBlock.AreaVariable[i][j].WriteLineVariable();
+                            CurrentCodeBlock.AreaVariable[i][j].WriteLineVariable(CurrentCodeBlock, CurrentIndex);
                             i = -1;
                             break;
                         }
